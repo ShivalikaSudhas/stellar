@@ -1,230 +1,272 @@
 # STELLAR — Spaceflight Telemetry, Evaluation, Longitudinal Longevity & Anomaly Recognition
+### Autonomous Offline-First Astronaut & Personal Health Intelligence System
 
 [![NASA Space Apps Challenge 2026](https://img.shields.io/badge/NASA%20Space%20Apps-2026%20Challenge-blue.svg)](https://www.spaceappschallenge.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
 [![Tests](https://img.shields.io/badge/tests-19%2F19%20passing-brightgreen.svg)]()
-[![Offline First](https://img.shields.io/badge/offline-IndexedDB%20Ready-cyan.svg)]()
+[![Offline First](https://img.shields.io/badge/offline-IndexedDB%20%2B%20PWA%20Ready-cyan.svg)]()
+[![TypeScript Strict](https://img.shields.io/badge/TypeScript-Strict%20Mode-blue.svg)]()
 
-> **NASA Space Apps Challenge 2026 | Astronaut Health Monitoring Software**
-> An autonomous, offline-first operational health intelligence system for long-duration deep-space exploration.
-
----
-
-## 1. Project Overview
-
-During long-duration missions beyond Low Earth Orbit (such as the Artemis lunar surface campaign and human transit to Mars), crew members operate under harsh microgravity physiological adaptations while enduring intermittent or multi-minute communication latencies with Earth (up to 22 minutes one-way delay).
-
-Traditional terrestrial health trackers fail in this regime:
-1. They evaluate astronauts against fixed, generic Earth-population clinical thresholds.
-2. They rely on continuous cloud connectivity and external server backends.
-3. They produce opaque "black-box" risk numbers that offer no clear mathematical traceability to mission flight rules.
-
-**STELLAR** is built from the ground up to solve these deep-space operational challenges:
-- **Personal Baseline Engine:** Calibrates individual statistical norms ($\mu, M, \sigma$, min, max, rolling windows) exclusively from each crew member's valid historical telemetry.
-- **Multi-Indicator Trend Analysis:** Cross-correlates cardiovascular response, peripheral oxygenation ($\text{SpO}_2$), circadian sleep curtailment, physical countermeasure compliance, and self-reported fatigue.
-- **Explainable Flight Alerts:** Deterministic, rule-governed alerts with mathematical provenance, empirical observations, and non-diagnostic operational mitigation protocols.
-- **100% Offline-First Architecture:** Zero cloud dependencies. All data persists locally in IndexedDB via Dexie.js, accompanied by a Service Worker Progressive Web App (PWA) cache.
+> **NASA Space Apps Challenge 2026 | Astronaut Health Monitoring Software**  
+> An autonomous, offline-first operational health intelligence system tailored for deep-space long-duration spaceflight (Artemis Lunar Base & Mars Transit) and comprehensive personalized longitudinal health monitoring.
 
 ---
 
-## 2. System Architecture
+## 1. Project Overview & Vision
+
+During long-duration space missions beyond Low Earth Orbit, crew members endure prolonged microgravity-related physiological adaptations (fluid cephalic shifts, cardiovascular deconditioning, circadian rhythm disruption, and bone-mineral density loss) while operating under severe communication delays with Earth (up to 22 minutes one-way latency to Mars).
+
+Traditional terrestrial health tracking systems fail in this environment:
+1. **Generic Static Cutoffs:** They evaluate astronauts against fixed population reference bands rather than learning the individual's personalized adaptive normal.
+2. **Cloud Dependency:** They rely on always-on external backends and cloud APIs unavailable in deep space.
+3. **Opaque Outputs:** They generate unexplained "black-box" risk scores without providing mathematically verifiable traceability to flight rules and operational protocols.
+
+**STELLAR** is engineered from the ground up to address both deep-space operational telemetry needs and modern personal health monitoring:
+- **Personal Baseline Learning:** Automatically calculates statistical norms ($\mu, M, \sigma$, min, max, rolling windows) exclusively from each individual's valid historical telemetry with rigorous confidence assessment.
+- **Cause-and-Effect Discovery:** Empirically maps the temporal chains connecting sleep quality, dietary macronutrients, cognitive stress, and physiological responses (e.g., `[Sleep Fragmentation] ➔ [Sympathetic Stress ↑] ➔ [Morning HR Spike]`).
+- **Explainable Non-Diagnostic Alerts:** Deterministic, rule-governed alerts with complete mathematical provenance, co-occurring indicator correlation, and actionable operational mitigation protocols.
+- **Dual Visual Architectures (Mobile & Laptop):** Faithfully implements both a mobile phone interface (featuring the signature woven plaid navy card, 72 bpm live ECG waveform, and 12-screen Orbital Flow) and a laptop dashboard (with linked clinicians, calendar schedule, and 3 circular progress rings).
+- **Darker High-Contrast Ink Typography:** Crisp, readable ink typography (`#060A14`, `#0F172A`) paired with classic serif typography (`Lora`) on sculpted ivory and white cards for maximum legibility under varying lighting conditions.
+- **100% Offline-First Operation:** Local persistence via IndexedDB (Dexie.js) paired with a Progressive Web App (PWA) service worker cache. Zero cloud APIs, zero external AI keys required.
+
+---
+
+## 2. Dual User Experience & Layout Architecture
+
+STELLAR features a persistent, top-level **Interface Mode Switcher** allowing instant transitions between specialized device viewports and clinical roles:
 
 ```mermaid
 flowchart TD
-    subgraph Cabin Inputs
-        A1[Sensor Hardware Telemetry]
-        A2[CSV / JSON Telemetry Files]
-        A3[Daily Crew Wellness Check-in]
-        A4[Mission Scenario Simulator]
+    App[Global Interface Mode Switcher] --> V1[📱 Mobile Phone Layout]
+    App --> V2[💻 Laptop Dashboard Layout]
+    App --> V3[📊 Mission Telemetry Console]
+    App --> V4[🩺 Doctor View]
+    App --> V5[🤝 Caregiver Circle]
+    App --> V6[👵 Elderly Mode]
+
+    subgraph Mobile Layout Modes
+        V1 --> M1[Pulse Daily View\n(Plaid Navy Card, 72 bpm ECG, Dark Font Vitals)]
+        V1 --> M2[Orbital 12-Flow System\n(Rotating 3D Earth, Telemetry Gauge, Sleep, Trends)]
     end
 
-    subgraph Data Validation & Storage
-        B1[Schema & Bounds Validator]
-        B2[Source Provenance Tracker]
-        B3[(Local IndexedDB - Dexie.js)]
-        B4[Offline Service Worker Cache]
+    subgraph Laptop Multi-Panel Grid
+        V2 --> L1[Left Sidebar: Profile, Nav, Emergency SOS]
+        V2 --> L2[Header: HELLO ASHA, Search, Biomarkers]
+        V2 --> L3[Middle: Linked Clinicians, Events, Schedule Calendar]
+        V2 --> L4[Right Column: Circular Progress Rings 90%, 60%, 75%]
     end
-
-    subgraph Analysis & Intelligence Core
-        C1[Personal Baseline Engine\nMean, Median, Std Dev, Confidence]
-        C2[Multi-Indicator Trend Detector\nConsecutive Deviations, Z-Scores]
-        C3[Explainable Alert Synthesis\nTraceability & Duplicate Suppression]
-    end
-
-    subgraph Operational Interface
-        D1[Mission Overview Dashboard]
-        D2[Health Analytics - Recharts]
-        D3[Personal Baseline Engine Explorer]
-        D4[Alert Management & Telemetry Trace]
-        D5[Daily Psychomotor Wellness Form]
-        D6[Mission Data Simulator Controls]
-        D7[Data Import & Error Remediation]
-        D8[Mission Health Reports - PDF & CSV]
-    end
-
-    A1 --> B1
-    A2 --> B1
-    A3 --> B2
-    A4 --> B2
-    B1 --> B2
-    B2 --> B3
-    B4 --> D1
-
-    B3 <--> C1
-    B3 <--> C2
-    C1 --> C3
-    C2 --> C3
-    C3 --> B3
-
-    B3 --> D1
-    B3 --> D2
-    B3 --> D3
-    B3 --> D4
-    B3 --> D5
-    B3 --> D6
-    B3 --> D7
-    B3 --> D8
 ```
 
----
-
-## 3. Technology Stack
-
-- **Frontend:** React 18, TypeScript (Strict Mode), Vite 6, Tailwind CSS, Lucide React icons
-- **Data Visualization:** Recharts (ComposedChart, Area, ReferenceLine, Tooltip)
-- **Local Persistence:** IndexedDB powered by Dexie.js & `dexie-react-hooks`
-- **Offline Infrastructure:** Progressive Web App (PWA) architecture with Service Worker asset caching
-- **Analysis Engine:** Pure TypeScript statistical engine (deterministic, zero cloud AI APIs)
-- **Reporting Engine:** Native print styling and CSV data export
-- **Testing:** Vitest, React Testing Library, jsdom
-
----
-
-## 4. Key Operational Features
-
-### A. Mission Overview Dashboard
-- Astronaut profile banner with callsign, mission ID, and Mission Elapsed Time (MET demo data).
-- Real-time indicator cards for Resting Heart Rate, $\text{SpO}_2$, Sleep Duration, Exercise Activity, Fatigue, and Stress.
-- Active alert priority list and recent telemetry stream with source provenance tagging.
-
-### B. Interactive Health Analytics
-- Configurable observation windows: **24-hour, 7-day, and 30-day views**.
-- Recharts visualizations with statistical **Personal Baseline Reference Bands** ($\pm 1.5\sigma$ warning, $\pm 2.5\sigma$ urgent).
-- Toggleable 3-point rolling average trend lines and interactive data inspection tooltips.
-
-### C. Personal Baseline Engine
-- Individualized reference profile calculation: Mean ($\mu$), Median ($M$), Standard Deviation ($\sigma$), Minimum, Maximum, and Sample Count.
-- Strict isolation: astronaut baselines are never cross-pollinated or substituted without authorization.
-- Confidence assessment: requires configurable minimum samples (default: 7) before marking a baseline as reliable; otherwise displays *"Insufficient historical data to establish a reliable personal baseline."*
-
-### D. Explainable Alert System
-- Evaluates deterministic flight rules against empirical telemetry deviations.
-- Three software severity tiers: `INFO`, `WARNING`, `URGENT` (clearly identified as software monitoring priorities, not clinical diagnoses).
-- Synthesizes transparent explanations detailing observed value, baseline mean, deviation, duration, and co-occurring factors.
-- Integrates non-diagnostic operational protocols (e.g. sensor reseating, ECLSS cabin check, schedule de-confliction).
-- Intelligent duplicate suppression prevents alert fatigue while maintaining persistence history.
-
-### E. Daily Wellness & Psychomotor Check-in
-- Crew self-report interface for sleep quality (1–5), fatigue (1–10), stress (1–10), mood (1–5), physical discomfort (1–10), and location/symptoms.
-- Persists locally and immediately feeds into the multi-indicator correlation engine.
-
-### F. Mission Data Simulator
-- **Scenario 1 (Normal Mission Day):** Generates nominal telemetry within statistical bounds; dashboard remains stable.
-- **Scenario 2 (Sleep Disruption):** Simulates progressive sleep loss ($<5.5\text{h}$) and fatigue accumulation ($7/10$), triggering an explainable warning alert.
-- **Scenario 3 (Unusual Physiological Trend):** Simulates an acute progressive heart rate climb ($>2.5\sigma$) with slight $\text{SpO}_2$ desaturation, triggering an explainable urgent alert with persistence verification.
-- Full playback controls: Start, Pause, Step Interval Speed, and Reset.
-
-### G. Data Import & Validation Engine
-- Ingests external CSV and JSON telemetry datasets.
-- Validates required schema, numeric ranges, units, ISO 8601 timestamps, and deduplication.
-- Displays comprehensive error messages with actionable remediation instructions.
-
-### H. Mission Health Report & Export
-- Aggregates comprehensive crew health summaries across custom time windows (24h, 7d, 14d, 30d).
-- Audits and clearly distinguishes simulated, imported, and sensor records.
-- Downloads full telemetry and alerts to CSV, or prints/exports formatted reports to PDF.
+### A. Mobile Phone Experience
+Located in [`src/components/layout/MobilePhoneView.tsx`](file:///d:/STELLAR/src/components/layout/MobilePhoneView.tsx):
+- **Pulse Daily View (Signature Home Screen):**
+  - **Status & App Header:** Realistic status bar (`10:57`, `Vo LTE`, `61% battery`), header with share, messages, and menu icons.
+  - **Plaid Navy Signature Card:** Deep navy gingham pattern card featuring:
+    - *"Good morning, Asha."* in bold white serif typography.
+    - Clinical context note: *"Grab your coffee and take it slow. Your blood pressure is a little above your own normal today, and everything else looks steady."*
+    - **72 bpm** readout: Large 50px bold serif numeral with live animated ECG cardiac waveform.
+  - **"Your vitals" Section:** Set in bold dark ink serif typography (`#060A14`).
+  - **White Vitals Cards:** High-contrast dark typography with sparkline wave curves and status indicators:
+    - *Heart Rate:* `72 bpm` • `Normal` (tap to open interactive 30-day drilldown).
+    - *Blood Pressure:* `124/82 mmHg` • `A little above your own normal`.
+    - *Blood Oxygen (SpO2):* `98%` • `Normal baseline`.
+    - *Sleep Duration:* `7.8 hrs` • `Restful recovery`.
+  - **Floating Pill Bottom Navigation:** White floating bar with dark active button:
+    `Today` | `Insights` | `Log (+)` | `Care` | `Privacy`.
+- **Orbital 12-Flow View:**
+  - 1-click toggle to the complete 12-screen orbital mission suite:
+    1. *Welcome back, Astronaut* (Mission Day 42, rotating 3D Earth orbit, *"All systems nominal"* pill).
+    2. *Vitals Telemetry* (72 bpm gauge, BP, SpO2, Temp, 1D/1W/1M/1Y tabs, live AreaChart).
+    3. *Sleep Quality* (7h 48m, deep/light/REM stages, bar charts, sleep insights).
+    4. *Trends* (Heart rate +2%, SpO2 0%, Temp +0.1%, key clinical findings).
+    5. *Health Insights* (Cause-and-Effect flowchart: `[Sleep ↓] ➔ [Stress ↑] ➔ [HR ↑]`).
+    6. *Care Plan* (Active medication adherence checklist, exercise countermeasures, diet plan).
+    7. *Messages* (Doctor notes, flight surgeon advisories, system notifications).
+    8. *Profile* (Astronaut Asha / Patel, emergency contacts, privacy settings).
+    9. *Emergency SOS* (Location beacon, primary contact dispatch).
+    10. *Data Access Privacy* (Medical team, family member, research use toggles).
 
 ---
 
-## 5. Installation & Execution
+### B. Laptop / Desktop Dashboard Experience
+Located in [`src/components/layout/LaptopDashboardView.tsx`](file:///d:/STELLAR/src/components/layout/LaptopDashboardView.tsx):
+- **Left Sidebar:** Brand badge, user avatar card (`Asha Sharma • Patient / Astronaut`), vertical navigation links, and Emergency SOS button.
+- **Top Header Bar:** `HELLO, ASHA!` in uppercase bold serif typography, search bar for vitals/meds, and instant biomarker triggers (*Voice*, *Camera rPPG*, *Food Photo*).
+- **Middle Column:**
+  - **Linked Clinicians:** Cards for Dr. Rajesh Mehta (Lead Cardiologist), Dr. Priya Patel (Flight Surgeon), and Dr. Kevin Vance (Exercise Physiologist) with direct messaging actions.
+  - **Upcoming Clinical Events:** Monthly telehealth reviews and glucose calibration schedules.
+  - **Care Protocol Schedule:** Interactive mini calendar and daily schedule agenda items (T2 Treadmill, hydration checks, resistance mobility).
+  - **Live Vitals Matrix:** Pulse rate, blood pressure, and SpO2 cards.
+- **Right Column (3 Circular Progress Rings):**
+  - **Medication Adherence (90%):** Circular SVG ring with morning dose verification.
+  - **Daily Countermeasures (60%):** Circular SVG ring tracking 25/45 active minutes completed.
+  - **Sleep Recovery Score (75%):** Circular SVG ring tracking rest duration.
+
+---
+
+### C. Clinical & Specialized Perspectives
+- **Doctor Console View** ([`DoctorView.tsx`](file:///d:/STELLAR/src/features/doctor/DoctorView.tsx)): Clinician triage console with patient list sorted by risk (`high`, `moderate`, `stable`), vitals timeline, and feedback note composer.
+- **Caregiver Circle View** ([`CaregiverView.tsx`](file:///d:/STELLAR/src/features/caregiver/CaregiverView.tsx)): Family member dashboard supporting 3 privacy tiers (*Summary*, *Full*, *Emergency*) with 1-click voice call.
+- **Elderly Accessible Mode** ([`ElderlyModeView.tsx`](file:///d:/STELLAR/src/components/layout/ElderlyModeView.tsx)): High-contrast 24pt+ typography, 1-touch actions, and Web Speech API voice synthesis.
+- **Mission Telemetry Console** (Original NASA Space Apps Operational Suite): Full engineering suite featuring baseline engines, multi-indicator trend analytics, data simulator, CSV/JSON validator, and PDF/CSV mission reports.
+
+---
+
+## 3. Complete Feature Matrix (23+ Capabilities)
+
+| Category | Feature | Description & Implementation |
+|---|---|---|
+| **Data Collection** | **Multi-Metric Telemetry** | Tracks Resting HR, Systolic/Diastolic BP, Fasting Glucose, $\text{SpO}_2$, Sleep, Physical Activity, Body Weight, Temperature, and ECG. |
+| **Data Collection** | **Camera-Based Vitals (rPPG)** | Contactless photoplethysmography pulse & respiratory scanner using optical facial blood volume variations ([`CameraVitalsModal.tsx`](file:///d:/STELLAR/src/components/features/CameraVitalsModal.tsx)). |
+| **Data Collection** | **Voice Biomarkers** | 5-second acoustic analysis extracting simulated pitch, jitter, shimmer, respiration rate, and voice fatigue score ([`VoiceBiomarkerModal.tsx`](file:///d:/STELLAR/src/components/features/VoiceBiomarkerModal.tsx)). |
+| **Data Collection** | **Food Photo Logging** | Visual meal logging with automated macronutrient breakdown and glycemic spike risk estimation ([`FoodPhotoModal.tsx`](file:///d:/STELLAR/src/components/features/FoodPhotoModal.tsx)). |
+| **Data Collection** | **Manual Vital Logging** | Fast, flexible manual entry modal for crew self-reporting ([`LogVitalModal.tsx`](file:///d:/STELLAR/src/components/features/LogVitalModal.tsx)). |
+| **Intelligence** | **Personal Baseline Engine** | Individualized statistical calculations ($\mu, M, \sigma$, min, max, rolling average) with confidence status requiring 7+ valid samples ([`baselineEngine.ts`](file:///d:/STELLAR/src/core/analysis/baselineEngine.ts)). |
+| **Intelligence** | **Cause-and-Effect Discovery** | Analyzes multi-factor temporal correlations across sleep fragmentation, high-carb intake, workload stress, and subsequent blood pressure / pulse spikes ([`causeAndEffectEngine.ts`](file:///d:/STELLAR/src/core/analysis/causeAndEffectEngine.ts)). |
+| **Intelligence** | **Trend & Anomaly Detection** | Z-score statistical trend tracking with multi-indicator correlation ([`trendDetection.ts`](file:///d:/STELLAR/src/core/analysis/trendDetection.ts)). |
+| **Intelligence** | **Explainable Alert Engine** | Deterministic rule engine producing transparent observations, personal baseline deviations, persistence tracking, and operational action protocols ([`alertEngine.ts`](file:///d:/STELLAR/src/core/alerts/alertEngine.ts)). |
+| **Care & Support** | **Care Plan & Adherence** | Doctor-prescribed diet plans, exercise countermeasure schedules, daily medication adherence, and side-effect reporting ([`CarePlanView.tsx`](file:///d:/STELLAR/src/features/careplan/CarePlanView.tsx)). |
+| **Care & Support** | **Doctor Console View** | Risk-sorted patient triage list, longitudinal vitals timeline, and direct patient feedback note composer ([`DoctorView.tsx`](file:///d:/STELLAR/src/features/doctor/DoctorView.tsx)). |
+| **Care & Support** | **Caregiver Circle** | Granular family privacy tiers (*Summary*, *Full*, *Emergency*) with reassuring status indicators and priority calling ([`CaregiverView.tsx`](file:///d:/STELLAR/src/features/caregiver/CaregiverView.tsx)). |
+| **Care & Support** | **Elderly Accessible Mode** | Extra-large 24pt+ typography, high-contrast dark fonts on ivory/white panels, simple 1-touch actions, and voice synthesis ([`ElderlyModeView.tsx`](file:///d:/STELLAR/src/components/layout/ElderlyModeView.tsx)). |
+| **Care & Support** | **1-Page Doctor Brief** | Comprehensive pre-visit summary optimized for clinical review and printing (`window.print()`) ([`DoctorSummaryModal.tsx`](file:///d:/STELLAR/src/components/features/DoctorSummaryModal.tsx)). |
+| **Safety & Security** | **Emergency SOS Trigger** | 5-second countdown modal with automatic beacon dispatch simulation to mission control and primary family contacts ([`EmergencySosModal.tsx`](file:///d:/STELLAR/src/components/features/EmergencySosModal.tsx)). |
+| **Safety & Security** | **Data Access & Privacy** | Crew data ownership dashboard allowing toggleable permissions for medical teams, family members, and research use. |
+| **Data & Integrations** | **Full History Drilldown** | Tapping any vital opens a 30-day interactive Recharts chart with baseline envelope bands ($\mu \pm 2\sigma$) ([`VitalHistoryModal.tsx`](file:///d:/STELLAR/src/components/common/VitalHistoryModal.tsx)). |
+| **Data & Integrations** | **CSV / JSON Ingestion** | Comprehensive schema validation, unit verification, and error remediation ([`validator.ts`](file:///d:/STELLAR/src/core/validation/validator.ts)). |
+| **Data & Integrations** | **Mission Health Reports** | Multi-window health report generation with CSV telemetry download and PDF export ([`MissionReportsPage.tsx`](file:///d:/STELLAR/src/features/reports/MissionReportsPage.tsx)). |
+| **Data & Integrations** | **Mission Data Simulator** | Interactive playback of 3 demonstration scenarios (Normal Day, Sleep Disruption, Unusual Physiological Trend) ([`SimulatorPage.tsx`](file:///d:/STELLAR/src/features/simulator/SimulatorPage.tsx)). |
+| **Platform Essentials**| **100% Offline-First** | IndexedDB storage (Dexie.js) paired with Vite PWA Service Worker caching. Zero cloud dependencies. |
+| **Platform Essentials**| **Multilingual Support** | Plain-language health explanations translated across English, Hindi, Spanish, Tamil, and Telugu ([`translations.ts`](file:///d:/STELLAR/src/core/i18n/translations.ts)). |
+| **Platform Essentials**| **Role-Based Access** | Seamless role switching between Patient/Astronaut, Doctor/Flight Surgeon, and Family Caregiver. |
+
+---
+
+## 4. Visual Design & Typography Guidelines
+
+- **Typography System:**
+  - **Headings & Readouts:** Classic Serif (`Lora`, `Merriweather`, `Georgia`) for elegance, warmth, and clinical authority.
+  - **Body & UI Controls:** Clean modern sans-serif (`Inter`, system font stack).
+  - **Telemetry & Technical Codes:** Monospaced (`JetBrains Mono`, `Fira Code`).
+- **Dark Font Requirement:** All light/white/ivory cards utilize deep ink typography (`#060A14`, `#0A1020`, `#0F172A`) to ensure high contrast and maximum readability.
+- **Color Palette (Blue & White — No Purple):**
+  - **Deep Space Obsidian:** `#060B14` (primary backdrop).
+  - **Midnight Space Blue:** `#0B1220` (secondary containers).
+  - **Woven Plaid Navy:** `#1A2C4E` (signature mobile greeting card).
+  - **Sculpted Ivory Panel:** `#F6F3ED` (warm, high-contrast light panels).
+  - **Pure White Cards:** `#FFFFFF` (vitals snapshot cards).
+  - **Aerospace Cyan / Sky Accent:** `#38BDF8` (waveform glow and active indicators).
+  - **Cobalt Blue Accent:** `#2563EB` (primary clinical buttons).
+  - **Emerald Green:** `#10B981` (nominal baseline indicators).
+  - **Amber:** `#F59E0B` (warning alerts and elevated vitals).
+  - **Coral Red:** `#EF4444` (urgent flight alerts and Emergency SOS).
+
+---
+
+## 5. Technology Stack
+
+- **Frontend Framework:** React 18 with TypeScript in Strict Mode
+- **Bundler & Tooling:** Vite 6 with `@vitejs/plugin-react`
+- **Styling Architecture:** Tailwind CSS, PostCSS, custom CSS utilities
+- **Iconography:** Lucide React
+- **Data Visualization:** Recharts (ComposedChart, Area, Bar, ReferenceLine, Tooltip)
+- **Local Persistence:** IndexedDB via Dexie.js (`v2` schema) and `dexie-react-hooks`
+- **Offline Infrastructure:** Progressive Web App (PWA) via `vite-plugin-pwa` and Service Worker precaching
+- **Document Export:** Native print styling (`@media print`), jsPDF, html2canvas, and CSV generators
+- **Testing Framework:** Vitest, React Testing Library, jsdom
+
+---
+
+## 6. Installation & Local Development
 
 ### Prerequisites
-- Node.js (v18 or higher recommended; verified on Node v22)
-- npm or modern package manager
+- Node.js (v18.0.0 or higher recommended; verified on Node v22.13.0)
+- npm (v9.0.0 or higher)
 
-### 1. Install Dependencies
+### 1. Clone & Install
 ```bash
+git clone https://github.com/your-username/stellar-astronaut-health.git
+cd stellar-astronaut-health
 npm install
 ```
 
-### 2. Run the Development Server
+### 2. Run Development Server
 ```bash
 npm run dev
 ```
 Open your browser and navigate to `http://localhost:5173`.
 
-### 3. Run Unit Tests
+### 3. Run Unit Test Suite
 ```bash
 npm test
 ```
-Executes all 19 Vitest unit tests across baseline calculations, trend detection, alert rules, validator, and simulation engine.
+Executes all 19 Vitest unit tests covering baseline calculations, trend detection, alert explanation rules, CSV/JSON validators, and synthetic data simulation.
 
-### 4. Build for Production
+### 4. Build for Production (PWA)
 ```bash
 npm run build
 ```
-Creates the production build in `dist/` with optimized bundles and PWA service worker precaching.
+Generates production-optimized bundles in `dist/` with PWA service worker precaching (`sw.js`).
 
 ---
 
-## 6. How to Demonstrate the Simulator Scenarios for Judges
+## 7. How to Demonstrate the Application for Judges
 
-1. Open the application and navigate to the **Data Simulator** tab from the sidebar.
-2. **Demonstrate Scenario 1 (Normal Mission Day):**
-   - Click "Scenario 1: Normal Mission Day".
-   - Click **START SIMULATION**.
-   - Navigate to **Mission Overview** and **Health Analytics** to show nominal stable telemetry within the green baseline reference bands with zero false alarms.
-3. **Demonstrate Scenario 2 (Sleep Disruption):**
-   - Return to **Data Simulator**, select "Scenario 2: Sleep Disruption", and resume simulation.
-   - Within 2–3 cycles, observe sleep curtailment and fatigue accumulation.
-   - Navigate to **Alerts & Events** and **Mission Overview** to show the explainable warning alert correlating sleep deficit with cardiovascular elevation.
-4. **Demonstrate Scenario 3 (Unusual Physiological Trend):**
-   - In **Data Simulator**, select "Scenario 3: Unusual Physiological Trend".
-   - Watch resting heart rate progressively climb ($64 \rightarrow 71 \rightarrow 80 \rightarrow 91\text{ bpm}$) exceeding $+2.5\sigma$.
-   - Observe the immediate generation of an **URGENT** alert with persistence tracking, supporting evidence trace, and non-diagnostic crew action protocols.
+### Demonstration 1: Mobile Phone Interface (Image 1 & 3)
+1. At the top of the application, click **"Mobile Phone (Image 1 & 3)"** on the Interface Mode switcher.
+2. Observe the **Pulse Daily View**:
+   - Inspect the woven **Plaid Navy Card** displaying *"Good morning, Asha."*, clinical context notes, and the live animated **72 bpm ECG waveform**.
+   - Review the **"Your vitals"** section with dark ink typography on clean white cards.
+   - Tap the **Heart rate (72 bpm)** card to launch the **Full Vital History Modal** with interactive 30-day charts and personal baseline bands.
+3. Click the **"Orbital Mode"** button on the card or floating navbar to explore the **12-Screen Orbital Flow**:
+   - Screen 1: Rotating 3D Earth orbit visual with *"All systems nominal"* status pill.
+   - Screen 2: Live 72 bpm telemetry gauge and 24-hour wave curve.
+   - Screen 5: **Cause-and-Effect flowchart** demonstrating empirical links (`[Sleep Fragmentation] ➔ [Stress ↑] ➔ [Morning HR Spike]`).
+   - Screen 6: Care plan checklist with medication adherence tracking.
+
+### Demonstration 2: Laptop Dashboard Interface (Image 2)
+1. Click **"Laptop Dashboard (Image 2)"** on the top switcher.
+2. Observe the multi-panel layout:
+   - Left sidebar with astronaut avatar and navigation.
+   - Top header with `HELLO, ASHA!`, search bar, and biomarker triggers.
+   - Middle column showing **Linked Clinicians** (Dr. Mehta, Dr. Patel, Dr. Vance), **Upcoming Events**, and the **Care Protocol Calendar**.
+   - Right column showing the **3 Circular Progress Rings** (90% Medication Adherence, 60% Countermeasures, 75% Sleep Recovery).
+
+### Demonstration 3: Specialized Modals & Tools
+1. **Camera rPPG Vitals:** Click the camera icon in the header to run a contactless pulse scan.
+2. **Voice Biomarkers:** Click the microphone icon to analyze voice pitch, jitter, and fatigue score.
+3. **Food Photo Logging:** Click the utensils icon to inspect macronutrients and glycemic spike risk.
+4. **1-Page Doctor Brief:** Click **"1-Page Doctor Brief"** to preview the printable clinical summary.
+5. **Emergency SOS:** Click **"SOS"** to trigger the 5-second countdown and simulated dispatch.
+
+### Demonstration 4: Mission Telemetry & Data Simulator
+1. Click **"Mission Telemetry"** on the top switcher.
+2. Navigate to the **Data Simulator** tab from the left sidebar.
+3. Test the 3 operational scenarios:
+   - **Scenario 1 (Normal Mission Day):** Telemetry remains stable within personal baseline reference bands with zero false alarms.
+   - **Scenario 2 (Sleep Disruption):** Induces sleep curtailment and fatigue accumulation, generating an explainable warning alert.
+   - **Scenario 3 (Unusual Physiological Trend):** Simulates progressive heart rate elevation ($>2.5\sigma$) with SpO2 desaturation, generating an explainable urgent flight alert with persistence verification.
 
 ---
 
-## 7. Two-Member Team Contribution Model
-
-This project was built following a two-member engineering workstream approach:
+## 8. Two-Member Team Contribution Model
 
 | Workstream | Focus Area | Deliverables |
 |---|---|---|
-| **Workstream A: Data & Intelligence** | Core Computation & Models | Mathematical baseline algorithms, statistical deviation models, multi-indicator trend correlation, explainable alert engine, synthetic data generator, CSV/JSON validation rules, and comprehensive unit test suite. |
-| **Workstream B: Frontend & Aerospace UX** | Product Architecture & Interface | Aerospace-grade visual design (deep navy/cyan), interactive Recharts analytics with baseline bands, daily wellness form, alert management system, offline PWA setup, and mission report PDF/CSV export. |
+| **Workstream A: Data & Intelligence** | Core Computation & Statistical Modeling | Mathematical baseline algorithms, statistical deviation models, multi-indicator trend correlation, cause-and-effect engine, explainable alert engine, synthetic data generator, CSV/JSON validation rules, and Vitest test suite. |
+| **Workstream B: Frontend & Aerospace UX** | Product Architecture & Interface Design | Dual layout architectures (Mobile Phone & Laptop Dashboard), dark high-contrast typography, interactive Recharts analytics, biomarker and contactless scanner modals, PWA offline caching, doctor & caregiver views, and PDF/CSV reports. |
 
 ---
 
-## 8. Limitations & Clinical Boundaries
+## 9. Clinical Boundaries & Disclosures
 
-1. **Non-Diagnostic Prototype:** STELLAR is an operational awareness aid and research prototype for the NASA Space Apps Challenge 2026. It is not an FDA, CE, or space agency certified medical diagnostic device.
-2. **Correlation vs Causality:** Multi-indicator trends represent temporal co-occurrences and physiological stress indices, not medical diagnoses.
-3. **Demonstration Thresholds:** Anomaly sensitivity rules ($\pm 1.5\sigma$ and $\pm 2.5\sigma$) are configurable demonstration parameters pending flight certification.
-4. **Hardware Telemetry:** Direct Bluetooth/ANT+ biosensor integration is designed as a future module; currently simulated and file-imported telemetry are fully supported with strict provenance tracking.
-
----
-
-## 9. Future Scope
-
-- Integration with Bluetooth Low Energy (BLE) astronaut bio-harness sensors (e.g., Astroskin, Bio-Monitor).
-- Real-time telemetry packet synchronization with ECLSS cabin atmospheric telemetry (CO2 partial pressure, pO2, cabin pressure).
-- Cryptographic zero-knowledge verification for crew medical privacy during Earth communication passes.
-- Offline voice-enabled log entry for hands-free crew reporting during intravehicular activities (IVA).
+1. **Operational Awareness Aid:** STELLAR is a research prototype and astronaut health awareness aid developed for the NASA Space Apps Challenge 2026. It does not provide medical diagnoses or replace flight surgeons and licensed medical personnel.
+2. **Correlation vs. Causality:** Cause-and-effect insights and multi-indicator correlations represent statistical co-occurrences and physiological stress patterns.
+3. **Data Authenticity:** All telemetry and astronaut profiles shown are synthesized for software evaluation and do not represent actual classified NASA astronaut health records.
 
 ---
 
-## 10. License & Disclosures
+## 10. License
 
-Distributed under the MIT License. Developed for the NASA Space Apps Challenge 2026. STELLAR explicitly discloses that all demonstration data is synthesized for software evaluation and does not represent actual NASA astronaut telemetry.
+Distributed under the **MIT License**. Developed for the **NASA Space Apps Challenge 2026**.
