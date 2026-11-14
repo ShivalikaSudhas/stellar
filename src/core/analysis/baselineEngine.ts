@@ -122,9 +122,14 @@ export function calculateAllPersonalBaselines(
   readings: HealthReading[],
   minRequiredSamples: Record<MetricType, number> = {
     heart_rate: 7,
+    blood_pressure_sys: 5,
+    blood_pressure_dia: 5,
+    glucose: 5,
     spo2: 7,
     sleep_duration: 5,
     activity: 7,
+    weight: 5,
+    temperature: 5,
     fatigue: 5,
     stress: 5,
     core_temp: 7
@@ -132,9 +137,14 @@ export function calculateAllPersonalBaselines(
 ): Record<MetricType, HealthBaseline> {
   const metrics: MetricType[] = [
     'heart_rate',
+    'blood_pressure_sys',
+    'blood_pressure_dia',
+    'glucose',
     'spo2',
     'sleep_duration',
     'activity',
+    'weight',
+    'temperature',
     'fatigue',
     'stress',
     'core_temp'

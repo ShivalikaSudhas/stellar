@@ -8,38 +8,53 @@ export default {
     extend: {
       colors: {
         space: {
-          950: '#080E1B', // Primary background
-          900: '#111C2D', // Secondary background
-          850: '#142033', 
-          800: '#172438', // Card background
-          750: '#1D2E47',
-          700: '#223552', // Borders
-          600: '#31486B',
-          500: '#486894',
-          400: '#5B6E88',
-          300: '#8E9EB5', // Muted text
-          200: '#B0C2DE',
-          100: '#D5E2F5',
-          50: '#F0F5FC'
+          950: '#060B14', // Deepest obsidian space black
+          900: '#0B1220', // Midnight space blue
+          850: '#0F1A2E', // Dark panel navy
+          800: '#15243B', // Card background
+          750: '#1C304D',
+          700: '#264065', // Border lines
+          600: '#3A5A8A',
+          500: '#5A7EA8',
+          400: '#8CA7C7',
+          300: '#B8CCE3',
+          200: '#DDE7F3',
+          100: '#EFF4FA',
         },
-        cyan: {
-          accent: '#36D6E7', // Electric cyan
-          glow: 'rgba(54, 214, 231, 0.15)',
+        ivory: {
+          DEFAULT: '#F5F2EB', // Signature cream/ivory card from reference image
+          card: '#F6F3ED',
+          light: '#FAF8F5',
+          border: '#E8E2D5',
+          dark: '#E2DBD0',
         },
-        blue: {
-          accent: '#568CFF', // Soft blue
-          glow: 'rgba(86, 140, 255, 0.15)',
+        ink: {
+          950: '#060A14', // Extra dark sharp text for ivory cards
+          900: '#0A1020',
+          800: '#121B30',
+          700: '#1E2B45',
+          600: '#2F3F5E',
+          500: '#4A5D80',
+          400: '#6E81A3',
         },
-        status: {
-          success: '#10B981',
-          warning: '#F59E0B',
-          critical: '#EF4444',
-          info: '#36D6E7'
+        accent: {
+          blue: '#38BDF8', // Cyan/sky blue glow
+          cobalt: '#2563EB',
+          soft: '#60A5FA',
+          coral: '#EF4444', // SOS red/coral
+          emerald: '#10B981', // Normal green
+          amber: '#F59E0B', // Warning amber
         }
       },
       fontFamily: {
+        serif: ['Lora', 'Merriweather', 'Georgia', 'serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+      boxShadow: {
+        'glow-blue': '0 0 25px -5px rgba(56, 189, 248, 0.25)',
+        'glow-coral': '0 0 30px -5px rgba(239, 68, 68, 0.35)',
+        'ivory-card': '0 10px 30px -10px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.1)',
       }
     },
   },

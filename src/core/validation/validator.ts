@@ -24,9 +24,14 @@ export interface ValidationResult {
 
 export const ALLOWED_METRICS: Record<MetricType, { units: string[]; min: number; max: number }> = {
   heart_rate: { units: ['bpm', 'beats/min'], min: 30, max: 230 },
+  blood_pressure_sys: { units: ['mmHg', 'mmhg'], min: 70, max: 240 },
+  blood_pressure_dia: { units: ['mmHg', 'mmhg'], min: 40, max: 140 },
+  glucose: { units: ['mg/dL', 'mg/dl'], min: 40, max: 500 },
   spo2: { units: ['%', 'percent'], min: 70, max: 100 },
   sleep_duration: { units: ['hours', 'h', 'hrs'], min: 0, max: 18 },
   activity: { units: ['mins', 'min', 'minutes'], min: 0, max: 360 },
+  weight: { units: ['kg', 'lbs'], min: 20, max: 300 },
+  temperature: { units: ['°C', 'celsius', 'C'], min: 32.0, max: 43.0 },
   fatigue: { units: ['scale_1_10', '1-10', 'pts'], min: 1, max: 10 },
   stress: { units: ['scale_1_10', '1-10', 'pts'], min: 1, max: 10 },
   core_temp: { units: ['°C', 'celsius', 'C'], min: 34.0, max: 42.0 }

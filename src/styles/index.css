@@ -8,63 +8,101 @@
 
 body {
   margin: 0;
-  background-color: #080E1B;
-  color: #E2E8F0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #060B14;
+  color: #F1F5F9;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
 }
 
-/* Custom aerospace scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* Aerospace Racing / Mission Checkerboard Accent */
+.checkerboard-badge {
+  background-image: 
+    linear-gradient(45deg, #FFFFFF 25%, transparent 25%), 
+    linear-gradient(-45deg, #FFFFFF 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #FFFFFF 75%), 
+    linear-gradient(-45deg, transparent 75%, #FFFFFF 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+  opacity: 0.85;
 }
 
-::-webkit-scrollbar-track {
-  background: #080E1B;
+.checkerboard-badge-dark {
+  background-image: 
+    linear-gradient(45deg, #0A1020 25%, transparent 25%), 
+    linear-gradient(-45deg, #0A1020 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #0A1020 75%), 
+    linear-gradient(-45deg, transparent 75%, #0A1020 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+  opacity: 0.9;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #223552;
-  border-radius: 3px;
+/* Sculpted Ivory Card (Matching user reference image exactly) */
+.ivory-panel {
+  background-color: #F6F3ED;
+  color: #060A14; /* Extra dark high-contrast ink font requested by user */
+  border: 1px solid #E8E2D5;
+  border-radius: 1.75rem;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.45);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #36D6E7;
+.ivory-panel h1, .ivory-panel h2, .ivory-panel h3, .ivory-panel h4 {
+  color: #060A14;
+  font-weight: 700;
 }
 
-/* Glass & Card styles */
-.aerospace-card {
-  background-color: #172438;
-  border: 1px solid #223552;
-  border-radius: 0.5rem;
+/* Plaid Navy Signature Card (Matching user Image 1 Reference exactly) */
+.plaid-navy-card {
+  background-color: #1a2c4e;
+  background-image: 
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09) 1px, transparent 1px, transparent 24px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09) 1px, transparent 1px, transparent 24px),
+    repeating-linear-gradient(0deg, rgba(11, 20, 38, 0.45), rgba(11, 20, 38, 0.45) 12px, transparent 12px, transparent 48px),
+    repeating-linear-gradient(90deg, rgba(11, 20, 38, 0.45), rgba(11, 20, 38, 0.45) 12px, transparent 12px, transparent 48px);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 1.75rem;
+}
+
+/* Dark Space Glass Card */
+.space-card {
+  background-color: #0F1A2E;
+  border: 1px solid #1C304D;
+  border-radius: 1.75rem;
   transition: all 0.2s ease-in-out;
 }
 
-.aerospace-card:hover {
-  border-color: #31486B;
+.space-card:hover {
+  border-color: #2E4B75;
 }
 
-.aerospace-input {
-  background-color: #111C2D;
-  border: 1px solid #223552;
-  color: #F8FAFC;
-  border-radius: 0.375rem;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  transition: border-color 0.15s ease-in-out;
+/* Celestial Globe Glow Effect */
+.orbital-glow {
+  box-shadow: inset 0 0 40px rgba(56, 189, 248, 0.25), 0 0 35px rgba(56, 189, 248, 0.2);
 }
 
-.aerospace-input:focus {
-  outline: none;
-  border-color: #36D6E7;
-  box-shadow: 0 0 0 1px #36D6E7;
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
 }
 
-/* Print styling for mission reports */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #264065;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #38BDF8;
+}
+
+/* Print Rules for Doctor Summary */
 @media print {
   body {
-    background: #ffffff !important;
+    background: #FFFFFF !important;
     color: #000000 !important;
   }
   .no-print {
@@ -73,10 +111,10 @@ body {
   .print-only {
     display: block !important;
   }
-  .aerospace-card {
-    border: 1px solid #cccccc !important;
-    background: #ffffff !important;
+  .ivory-panel, .space-card {
+    background: #FFFFFF !important;
     color: #000000 !important;
-    break-inside: avoid;
+    border: 1px solid #CBD5E1 !important;
+    box-shadow: none !important;
   }
 }

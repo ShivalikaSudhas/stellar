@@ -55,6 +55,31 @@ export const OPERATIONAL_PROTOCOLS: Record<MetricType, { info: string; warning: 
     info: 'Verify thermal sensor calibration against cabin standard.',
     warning: 'Hydrate and evaluate crew liquid cooling garment (LCG) temperature setpoint.',
     urgent: 'Inspect for thermoregulatory dysregulation or infection markers. Review crew medical kit protocol.'
+  },
+  blood_pressure_sys: {
+    info: 'Log resting blood pressure in a calm, seated position with arm supported at heart level.',
+    warning: 'Rest for 10 minutes in quiet room; re-measure. Check hydration and recent sodium intake.',
+    urgent: 'Systolic pressure persistently elevated above personal baseline. Rest quietly; notify primary physician or care team.'
+  },
+  blood_pressure_dia: {
+    info: 'Diastolic reading logged. Ensure cuff is properly fitted over bare upper arm.',
+    warning: 'Diastolic variance detected. Avoid caffeine or strenuous activity for 30 minutes; repeat check.',
+    urgent: 'Sustained diastolic deviation. Review medication timing and contact consulting physician.'
+  },
+  glucose: {
+    info: 'Record meal timing and carbohydrate content in the daily nutrition log.',
+    warning: 'Post-prandial glycemic excursion detected. Drink water, engage in a 10-minute light stroll.',
+    urgent: 'Significant blood glucose spike or rapid drop below target threshold. Follow prescribed hypoglycemia/hyperglycemia protocol.'
+  },
+  weight: {
+    info: 'Weigh yourself at the same time each morning after voiding.',
+    warning: 'Acute weight shift detected (>1.5 kg in 48h). Check for fluid retention or dehydration symptoms.',
+    urgent: 'Rapid fluid accumulation pattern. Alert clinical team to evaluate heart failure / diuretic protocol.'
+  },
+  temperature: {
+    info: 'Log temperature reading; verify probe placement.',
+    warning: 'Low-grade thermal elevation. Hydrate, rest, and monitor for accompanying infection symptoms.',
+    urgent: 'Significant fever response. Contact primary doctor and follow acute infection care guidelines.'
   }
 };
 

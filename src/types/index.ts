@@ -1,13 +1,28 @@
 export type MetricType =
   | 'heart_rate'
+  | 'blood_pressure_sys'
+  | 'blood_pressure_dia'
+  | 'glucose'
   | 'spo2'
   | 'sleep_duration'
   | 'activity'
+  | 'weight'
+  | 'temperature'
   | 'fatigue'
   | 'stress'
   | 'core_temp';
 
-export type MetricUnit = 'bpm' | '%' | 'hours' | 'mins' | 'scale_1_10' | 'scale_1_5' | '°C';
+export type MetricUnit =
+  | 'bpm'
+  | 'mmHg'
+  | 'mg/dL'
+  | '%'
+  | 'hours'
+  | 'mins'
+  | 'kg'
+  | '°C'
+  | 'scale_1_10'
+  | 'scale_1_5';
 
 export type QualityStatus = 'nominal' | 'degraded' | 'unreliable' | 'synthetic';
 
@@ -18,7 +33,41 @@ export type DataSource =
   | 'imported_csv'
   | 'imported_json'
   | 'simulated'
-  | 'manual_entry';
+  | 'manual_entry'
+  | 'camera_rppg'
+  | 'voice_biomarker';
+
+export type UserRole = 'patient' | 'doctor' | 'caregiver';
+
+export type LanguageCode = 'en' | 'hi' | 'es' | 'ta' | 'te';
+
+export interface EmergencyContact {
+  id: string;
+  name: string;
+  relationship: string;
+  phone: string;
+  isPrimary: boolean;
+  notifyOnCritical: boolean;
+}
+
+export interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  avatarUrl?: string;
+  age: number;
+  gender: string;
+  callsign?: string;
+  missionId?: string;
+  bloodType?: string;
+  selectedLanguage: LanguageCode;
+  elderlyMode: boolean;
+  lowCostMode: boolean;
+  emergencyContacts: EmergencyContact[];
+  doctorName?: string;
+  hospitalAffiliation?: string;
+}
 
 export interface Astronaut {
   id: string;
@@ -27,14 +76,17 @@ export interface Astronaut {
   role: string;
   missionId: string;
   missionElapsedDays: number;
-  baselineProfileId?: string;
-  createdAt: string;
   avatarUrl?: string;
+  createdAt?: string;
+  baselineProfileId?: string;
+  age?: number;
+  gender?: string;
+  bloodType?: string;
 }
 
 export interface HealthReading {
   id: string;
-  astronautId: string;
+  astronautId: string; // patientId / user identifier
   metric: MetricType;
   value: number;
   unit: string;
@@ -69,7 +121,7 @@ export interface HealthAlert {
   severity: SeverityLevel;
   observedValue: number;
   baselineValue: number;
-  deviation: number; // percentage or absolute difference
+  deviation: number;
   deviationType: 'elevated' | 'depressed' | 'sustained_shift' | 'rapid_fluctuation';
   durationHours?: number;
   consecutiveReadings: number;
@@ -130,4 +182,167 @@ export interface MetricDefinition {
   defaultNominalRange: [number, number];
   description: string;
   iconName: string;
+}
+
+// ----------------------------------------------------
+// NEW SPECIFICATION INTERFACES
+// ----------------------------------------------------
+
+export interface CauseAndEffectInsight {
+  id: string;
+  title: string;
+  cause: string;
+  effect: string;
+  confidenceScore: number; // 0 to 100
+  timeframe: string;
+  explanation: string;
+  actionableNudge: string;
+  severity: 'info' | 'warning' | 'positive';
+  icon: string;
+}
+
+export interface EnvironmentalData {
+  aqi: number;
+  aqiCategory: 'Good' | 'Moderate' | 'Unhealthy for Sensitive' | 'Unhealthy' | 'Very Unhealthy';
+  pollenLevel: 'Low' | 'Moderate' | 'High';
+  temperatureC: number;
+  humidityPct: number;
+  altitudeM: number;
+  healthImplication: string;
+}
+
+export interface JustInTimeNudge {
+  id: string;
+  title: string;
+  message: string;
+  category: 'hydration' | 'breathing' | 'movement' | 'medication' | 'sleep';
+  actionLabel: string;
+  completed: boolean;
+  timestamp: string;
+}
+
+export interface MicroHabit {
+  id: string;
+  title: string;
+  description: string;
+  streakDays: number;
+  targetDaily: string;
+  completedToday: boolean;
+  impactMetric: string;
+}
+
+export interface Medication {
+  id: string;
+  name: string;
+  dosage: string;
+  frequency: string;
+  timeOfDay: 'Morning' | 'Afternoon' | 'Evening' | 'Bedtime';
+  purpose: string;
+  takenToday: boolean;
+  adherenceRatePct: number;
+  sideEffectsWarning?: string;
+}
+
+export interface MedicationSideEffectReport {
+  id: string;
+  medicationId: string;
+  medicationName: string;
+  symptom: string;
+  severity: 'mild' | 'moderate' | 'severe';
+  timestamp: string;
+  notes?: string;
+}
+
+export interface CarePlan {
+  id: string;
+  patientId: string;
+  doctorName: string;
+  hospital: string;
+  dietPlan: string[];
+  exercisePrescription: string[];
+  medications: Medication[];
+  clinicalTargets: { metric: string; target: string }[];
+  doctorNotes: string;
+  lastUpdated: string;
+}
+
+export type PrivacyTier = 'full' | 'summary' | 'emergency';
+
+export interface FamilyCircleMember {
+  id: string;
+  name: string;
+  relation: string;
+  avatarUrl?: string;
+  privacyTier: PrivacyTier;
+  phone: string;
+  lastActive: string;
+}
+
+export interface DataAccessAuditEntry {
+  id: string;
+  accessorName: string;
+  accessorRole: string;
+  organization: string;
+  purpose: string;
+  timestamp: string;
+  scope: string;
+  status: 'active' | 'revoked';
+}
+
+export interface VoiceBiomarkerResult {
+  id: string;
+  timestamp: string;
+  jitterPct: number;
+  shimmerPct: number;
+  vocalFatigueScore: number; // 1-10
+  stressIndex: number; // 1-10
+  respiratoryRateEstimate: number;
+  statusDescription: string;
+}
+
+export interface FoodPhotoLog {
+  id: string;
+  timestamp: string;
+  photoUrl: string;
+  mealName: string;
+  estimatedCalories: number;
+  estimatedCarbsG: number;
+  estimatedProteinG: number;
+  glucoseSpikeRisk: 'Low' | 'Moderate' | 'High';
+  insight: string;
+}
+
+export interface DoctorPatient {
+  id: string;
+  name: string;
+  age: number;
+  gender: string;
+  riskLevel: 'high' | 'moderate' | 'stable';
+  primaryCondition: string;
+  lastSystolicBP: number;
+  lastDiastolicBP: number;
+  lastHeartRate: number;
+  adherenceRate: number;
+  unacknowledgedAlerts: number;
+  lastUpdated: string;
+}
+
+export interface DoctorFeedbackNote {
+  id: string;
+  patientId: string;
+  doctorName: string;
+  title: string;
+  message: string;
+  timestamp: string;
+  read: boolean;
+}
+
+export interface NotificationItem {
+  id: string;
+  type: 'medication' | 'alert' | 'doctor' | 'habit' | 'emergency';
+  title: string;
+  message: string;
+  timestamp: string;
+  read: boolean;
+  priority: 'normal' | 'urgent';
 }

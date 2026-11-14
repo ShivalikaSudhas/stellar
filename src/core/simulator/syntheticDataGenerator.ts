@@ -75,6 +75,47 @@ export function generateHistoricalBaselineDataset(
       });
     });
 
+    // Blood Pressure (once per day at 08:30)
+    const bpTime = new Date(dayDate);
+    bpTime.setHours(8, 30, 0, 0);
+    const sysVal = Math.round(clamp(randomGaussian(121, 3.5), 112, 134));
+    const diaVal = Math.round(clamp(randomGaussian(78, 2.5), 72, 86));
+    readings.push({
+      id: `sim-bpsys-${astronautId}-${bpTime.getTime()}`,
+      astronautId,
+      metric: 'blood_pressure_sys',
+      value: sysVal,
+      unit: 'mmHg',
+      timestamp: bpTime.toISOString(),
+      source: 'simulated',
+      quality: 'synthetic'
+    });
+    readings.push({
+      id: `sim-bpdia-${astronautId}-${bpTime.getTime()}`,
+      astronautId,
+      metric: 'blood_pressure_dia',
+      value: diaVal,
+      unit: 'mmHg',
+      timestamp: bpTime.toISOString(),
+      source: 'simulated',
+      quality: 'synthetic'
+    });
+
+    // Blood Glucose (twice per day: 07:15 Fasting, 13:00 Post-prandial)
+    const gluTime = new Date(dayDate);
+    gluTime.setHours(7, 15, 0, 0);
+    const gluVal = Math.round(clamp(randomGaussian(96, 4.0), 84, 114));
+    readings.push({
+      id: `sim-glu-${astronautId}-${gluTime.getTime()}`,
+      astronautId,
+      metric: 'glucose',
+      value: gluVal,
+      unit: 'mg/dL',
+      timestamp: gluTime.toISOString(),
+      source: 'simulated',
+      quality: 'synthetic'
+    });
+
     // SpO2 (twice per day: 08:00, 20:00)
     [8, 20].forEach((hour) => {
       const spo2Time = new Date(dayDate);

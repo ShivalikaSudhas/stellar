@@ -35,7 +35,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Astronaut Selector */}
         <div className="flex items-center gap-2.5 bg-space-800 border border-space-700 rounded-lg px-3 py-1.5 hover:border-space-600 transition-colors">
           <div className="w-8 h-8 rounded-full bg-cyan-accent/10 border border-cyan-accent/30 flex items-center justify-center text-cyan-accent font-semibold text-xs">
-            {currentAstronaut.name.split(' ').map((n) => n[0]).join('')}
+            {currentAstronaut.name.split(' ').map((n: string) => n[0]).join('')}
           </div>
           <div>
             <div className="flex items-center gap-2">
