@@ -1,12 +1,9 @@
 import React from 'react';
 import {
   LayoutDashboard,
-  LineChart,
   Target,
   AlertTriangle,
-  ClipboardCheck,
   Cpu,
-  UploadCloud,
   FileText,
   Settings,
   Info,
@@ -41,7 +38,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const navItems: { id: NavigationTab; label: string; icon: React.ReactNode; badge?: string | number; badgeColor?: string }[] = [
     { id: 'overview', label: 'Mission Overview', icon: <LayoutDashboard size={18} /> },
-    { id: 'analytics', label: 'Health Analytics', icon: <LineChart size={18} /> },
     { id: 'baselines', label: 'Personal Baselines', icon: <Target size={18} /> },
     {
       id: 'alerts',
@@ -50,7 +46,6 @@ export const Navbar: React.FC<NavbarProps> = ({
       badge: unacknowledgedAlertCount > 0 ? unacknowledgedAlertCount : undefined,
       badgeColor: 'bg-red-500/20 text-red-400 border border-red-500/30'
     },
-    { id: 'wellness', label: 'Daily Check-in', icon: <ClipboardCheck size={18} /> },
     {
       id: 'simulator',
       label: 'Data Simulator',
@@ -58,7 +53,6 @@ export const Navbar: React.FC<NavbarProps> = ({
       badge: isSimulating ? 'ACTIVE' : undefined,
       badgeColor: 'bg-cyan-500/20 text-cyan-accent border border-cyan-500/30 animate-pulse'
     },
-    { id: 'import', label: 'Data Import & Validation', icon: <UploadCloud size={18} /> },
     { id: 'reports', label: 'Mission Reports', icon: <FileText size={18} /> },
     { id: 'settings', label: 'System Settings', icon: <Settings size={18} /> },
     { id: 'about', label: 'About STELLAR', icon: <Info size={18} /> },

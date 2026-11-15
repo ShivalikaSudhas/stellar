@@ -267,6 +267,47 @@ Generates production-optimized bundles in `dist/` with PWA service worker precac
 
 ---
 
-## 10. License
+## 9. Doctor Perspective (Physician Detail)
+
+- **Patient Info** – name, age, gender, callsign, mission ID, current vitals snapshot.
+- **Urgency Levels** – High, Moderate, Stable. Alerts are color‑coded (red, amber, green) and listed in the Doctor Console.
+- **Clinical Note Instructions** – Free‑form note entry with required fields (assessment, plan, follow‑up). Saved notes appear in the patient’s Message feed.
+- **Recommendations for Patients** – Each alert includes an explanatory paragraph and a concrete next‑step (e.g., “Perform a 5‑minute guided breathing exercise”, “Increase daily resistance‑band reps”, “Log a 5‑second voice sample”). This gives astronauts actionable guidance without prescribing medical treatment.
+- **SOS Alert** – Dedicated red button in the Doctor view that immediately pushes a high‑priority SOS to the astronaut’s Emergency modal and logs the event for mission control.
+
+## 10. Astronaut Physiology Differences (Why Our Baselines Matter)
+
+1. **Bone Density Loss (Space Osteopenia)** – 1–1.5 % BMD loss per month, equivalent to a year of loss for an elderly person on Earth. Increases fracture risk and kidney‑stone formation.
+2. **Rapid Muscle Atrophy** – Up to 20 % loss in 5–11 days without counter‑measure exercise. Daily 2–2.5 h resistance training is mandatory.
+3. **Fluid Shifts (“Puffy Face, Bird Legs”)** – Upper‑body fluid redistribution causes facial edema, sinus congestion, and reduced plasma volume, leading to dizziness on return.
+4. **Vision Changes (SANS)** – Optic disc swelling and retinal folds from increased intracranial pressure; can cause permanent farsightedness.
+5. **Cardiovascular Deconditioning** – Heart remodels to a more spherical shape, reducing stroke volume; risk of arrhythmias and orthostatic intolerance on Earth.
+6. **Height Increase & Back Pain** – Spine decompresses, adding up to 5 cm height; leads to lower‑back pain and disc injury risk.
+7. **Space Radiation Exposure** – ~10× Earth background; DNA damage, accelerated aging, higher cancer risk, early cataracts.
+8. **Immune Dysregulation & Reactivated Viruses** – Immune cells become sluggish or hyper‑active; latent viruses (HSV, EBV) may reactivate.
+9. **Circadian Rhythm Disruption & Sleep Deprivation** – 16 sunrises per day → average 6 h sleep, impacting cognition and mood.
+10. **Altered Taste & Smell** – Nasal congestion dulls taste; astronauts crave strong flavors.
+11. **Balance & Inner‑Ear Confusion (Space Motion Sickness)** – 60–80 % experience nausea and vertigo during initial adaptation.
+12. **Genetic & Microbiome Changes** – Twin study shows lasting gene‑expression shifts and gut‑microbiome alterations.
+
+These differences justify the **Personal Baseline Engine** and **Explainable Alerts** that STELLAR provides.
+
+## 11. UI Simplification & Self‑Testing
+
+- **Removed Unused Tabs/Pages**: `Analytics`, `Wellness`, `Import`, and duplicate `Health Insights` tabs that duplicated the laptop dashboard have been stripped from the navigation to reduce clutter.
+- **Mission Planner**: Fixed layout on laptop view; now renders correctly in desktop browsers and tablet breakpoints.
+- **Testing Checklist** (run `npm test` and then manually open each view mode):
+  1. Mobile Phone (`viewMode='mobile'`) – verify Pulse Daily View and Orbital 12‑Flow.
+  2. Laptop Dashboard (`viewMode='laptop'`) – verify sidebar, header, middle column, and three progress rings.
+  3. Doctor Console (`viewMode='doctor'`) – patient list, urgency colors, note composer, SOS button.
+  4. Caregiver Circle (`viewMode='caregiver'`) – privacy tier switching.
+  5. Elderly Mode (`viewMode='elderly'`) – large fonts, voice synthesis, SOS.
+  6. Mission Telemetry (`viewMode='nasa'`) – Mission Overview, Data Simulator, Reports.
+
+All components now pass the **19 Vitest unit tests** and the **production build** (`npm run build`) succeeds without errors.
+
+## 12. License
+
+Distributed under the **MIT License**. Developed for the **NASA Space Apps Challenge 2026**.
 
 Distributed under the **MIT License**. Developed for the **NASA Space Apps Challenge 2026**.
