@@ -299,7 +299,7 @@ export const App: React.FC = () => {
               }`}
             >
               <Stethoscope size={13} />
-              <span className="hidden md:inline">Flight Surgeon Console</span>
+              <span className="hidden md:inline">Doctor Console</span>
             </button>
           </div>
         </div>
@@ -387,12 +387,13 @@ export const App: React.FC = () => {
           </div>
         )}
 
-        {/* VIEW MODE 3: DOCTOR / FLIGHT SURGEON CONSOLE */}
+        {/* VIEW MODE 3: DOCTOR CONSOLE */}
         {viewMode === 'doctor' && (
           <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-space-950">
             <DoctorView
               onSendFeedbackNote={handleSendDoctorFeedback}
               patientReadings={readings}
+              onTriggerSos={() => setShowSosModal(true)}
             />
           </div>
         )}

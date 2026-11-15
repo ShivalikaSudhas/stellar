@@ -325,6 +325,10 @@ export interface DoctorPatient {
   adherenceRate: number;
   unacknowledgedAlerts: number;
   lastUpdated: string;
+  callsign?: string;
+  missionId?: string;
+  bloodType?: string;
+  spo2?: number;
 }
 
 export interface DoctorFeedbackNote {
