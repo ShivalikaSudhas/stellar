@@ -55,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     },
     { id: 'reports', label: 'Mission Reports', icon: <FileText size={18} /> },
     { id: 'settings', label: 'System Settings', icon: <Settings size={18} /> },
-    { id: 'about', label: 'About STELLAR', icon: <Info size={18} /> },
+    { id: 'about', label: 'About Dr. ORBIT', icon: <Info size={18} /> },
   ];
 
   return (
@@ -67,9 +67,9 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
         <div>
           <div className="flex items-center gap-1.5">
-            <span className="font-bold tracking-widest text-white text-base">STELLAR</span>
+            <span className="font-bold tracking-widest text-white text-base">Dr. ORBIT</span>
             <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-cyan-accent/10 text-cyan-accent border border-cyan-accent/30">
-              v1.0
+              v2.4
             </span>
           </div>
           <div className="text-[10px] text-space-300 font-mono tracking-tight uppercase">

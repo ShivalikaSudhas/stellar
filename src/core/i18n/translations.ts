@@ -20,7 +20,6 @@ export interface TranslationDictionary {
   doctorSummary: string;
   familyCircle: string;
   emergencySos: string;
-  elderlyMode: string;
   lowCostMode: string;
   today: string;
   insights: string;
@@ -28,7 +27,6 @@ export interface TranslationDictionary {
   care: string;
   privacy: string;
   doctorView: string;
-  caregiverView: string;
   patientView: string;
 }
 
@@ -51,17 +49,15 @@ export const TRANSLATIONS: Record<LanguageCode, TranslationDictionary> = {
     microHabit: 'Micro-Habit Coaching',
     carePlan: 'Doctor Care Plan',
     doctorSummary: '1-Page Doctor Summary',
-    familyCircle: 'Family Privacy Circle',
+    familyCircle: 'Mission Support Privacy Circle',
     emergencySos: 'Emergency SOS',
-    elderlyMode: 'Elderly Mode (Large Text)',
-    lowCostMode: 'Low-Cost Phone Mode',
+    lowCostMode: 'Low-Bandwidth Flight Mode',
     today: 'Today',
     insights: 'Insights',
     log: 'Log',
     care: 'Care',
     privacy: 'Privacy',
     doctorView: 'Doctor View',
-    caregiverView: 'Caregiver View',
     patientView: 'Patient View'
   },
   hi: {
@@ -82,17 +78,15 @@ export const TRANSLATIONS: Record<LanguageCode, TranslationDictionary> = {
     microHabit: 'दैनिक छोटी अच्छी आदत',
     carePlan: 'डॉक्टर की देखभाल योजना',
     doctorSummary: 'डॉक्टर हेतु 1-पेज सारांश',
-    familyCircle: 'पारिवारिक घेरा',
+    familyCircle: 'मिशन सहायता घेरा',
     emergencySos: 'आपातकालीन एसओएस',
-    elderlyMode: 'बुजुर्ग मोड (बड़ा टेक्स्ट)',
-    lowCostMode: 'सरल फोन मोड',
+    lowCostMode: 'लो-बैंडविड्थ फ्लाइट मोड',
     today: 'आज',
     insights: 'विश्लेषण',
     log: 'दर्ज करें',
     care: 'देखभाल',
     privacy: 'गोपनीयता',
     doctorView: 'डॉक्टर दृश्य',
-    caregiverView: 'देखभालकर्ता दृश्य',
     patientView: 'मरीज दृश्य'
   },
   es: {
@@ -113,17 +107,15 @@ export const TRANSLATIONS: Record<LanguageCode, TranslationDictionary> = {
     microHabit: 'Micro-hábito diario',
     carePlan: 'Plan de cuidados médicos',
     doctorSummary: 'Resumen médico en 1 página',
-    familyCircle: 'Círculo familiar de privacidad',
+    familyCircle: 'Círculo de apoyo a la misión',
     emergencySos: 'SOS de Emergencia',
-    elderlyMode: 'Modo Mayores (Texto grande)',
-    lowCostMode: 'Modo Teléfono Básico',
+    lowCostMode: 'Modo de vuelo de bajo ancho de banda',
     today: 'Hoy',
     insights: 'Perspectivas',
     log: 'Registrar',
     care: 'Cuidados',
     privacy: 'Privacidad',
     doctorView: 'Vista Médico',
-    caregiverView: 'Vista Cuidador',
     patientView: 'Vista Paciente'
   },
   ta: {
@@ -144,17 +136,15 @@ export const TRANSLATIONS: Record<LanguageCode, TranslationDictionary> = {
     microHabit: 'தினசரி பழக்கவழக்கம்',
     carePlan: 'மருத்துவர் பராமரிப்புத் திட்டம்',
     doctorSummary: 'மருத்துவர் சுருக்கம் (1 பக்கம்)',
-    familyCircle: 'குடும்ப வட்டம்',
+    familyCircle: 'மிஷன் ஆதரவு வட்டம்',
     emergencySos: 'அவசர உதவி SOS',
-    elderlyMode: 'முதியோர் பயன்முறை (பெரிய எழுத்துகள்)',
-    lowCostMode: 'எளிய தொலைபேசி முறை',
+    lowCostMode: 'குறைந்த அலைவரிசை முறை',
     today: 'இன்று',
     insights: 'ஆய்வு',
     log: 'பதிவு',
     care: 'பராமரிப்பு',
     privacy: 'தனியுரிமை',
     doctorView: 'மருத்துவர் பார்வை',
-    caregiverView: 'பராமரிப்பாளர் பார்வை',
     patientView: 'நோயாளி பார்வை'
   },
   te: {
@@ -171,21 +161,19 @@ export const TRANSLATIONS: Record<LanguageCode, TranslationDictionary> = {
     alert: 'జాగ్రత్త అవసరం',
     yourVitals: 'మీ ఆరోగ్య కొలతలు',
     baselineNormal: 'మీ వ్యక్తిగత సాధారణ స్థాయి ప్రకారం',
-    causeAndEffect: 'కారణం - ప్రభావం విశ్లేషణ',
+    causeAndEffect: 'कारणం - ప్రభావం విశ్లేషణ',
     microHabit: 'రోజువారీ మంచి అలవాటు',
     carePlan: 'వైద్యుల సంరక్షణ ప్రణాళిక',
     doctorSummary: 'డాక్టర్ సమ్మరీ (1 పేజీ)',
-    familyCircle: 'కుటుంబ భద్రత వలయం',
+    familyCircle: 'మిషన్ మద్దతు వలయం',
     emergencySos: 'అత్యవసర SOS',
-    elderlyMode: 'పెద్దల మోడ్ (పెద్ద అక్షరాలు)',
-    lowCostMode: 'తక్కువ డేటా మోడ్',
+    lowCostMode: 'తక్కువ బ్యాండ్‌విడ్త్ మోడ్',
     today: 'ఈరోజు',
     insights: 'అంతర్దృష్టులు',
     log: 'నమోదు',
     care: 'సంరక్షణ',
     privacy: 'గోప్యత',
     doctorView: 'డాక్టర్ వీక్షణ',
-    caregiverView: 'సంరక్షకుల వీక్షణ',
     patientView: 'రోగి వీక్షణ'
   }
 };

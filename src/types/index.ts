@@ -37,7 +37,7 @@ export type DataSource =
   | 'camera_rppg'
   | 'voice_biomarker';
 
-export type UserRole = 'patient' | 'doctor' | 'caregiver';
+export type UserRole = 'patient' | 'doctor';
 
 export type LanguageCode = 'en' | 'hi' | 'es' | 'ta' | 'te';
 
@@ -329,6 +329,34 @@ export interface DoctorPatient {
   missionId?: string;
   bloodType?: string;
   spo2?: number;
+  baselineHeartRate?: number;
+  baselineSystolicBP?: number;
+  baselineDiastolicBP?: number;
+  baselineSpo2?: number;
+  baselineSleepHours?: number;
+  lastSleepHours?: number;
+  sleepDebtHours?: number;
+  caloriesPlanned?: number;
+  caloriesConsumed?: number;
+  waterConsumedMl?: number;
+  waterTargetMl?: number;
+  radiationDailyMilliSv?: number;
+  radiationCumulativeMilliSv?: number;
+  exerciseAredMinutes?: number;
+  exerciseT2Minutes?: number;
+  moodRating?: number;
+  nauseaRating?: number;
+  urgencyRationale?: string;
+  hasActiveSos?: boolean;
+  sosDetails?: {
+    timestamp: string;
+    pulse: number;
+    bp: string;
+    spo2: number;
+    acknowledged: boolean;
+    acknowledgedAt?: string;
+    backupEscalationSeconds?: number;
+  };
 }
 
 export interface DoctorFeedbackNote {
@@ -339,6 +367,10 @@ export interface DoctorFeedbackNote {
   message: string;
   timestamp: string;
   read: boolean;
+  reviewDate?: string;
+  digitalSignature?: string;
+  credentials?: string;
+  status?: 'Sent to Crew Terminal' | 'Acknowledged by Astronaut';
 }
 
 export interface NotificationItem {
@@ -349,4 +381,92 @@ export interface NotificationItem {
   timestamp: string;
   read: boolean;
   priority: 'normal' | 'urgent';
+}
+
+export interface RadiationData {
+  currentRateMicroSvPerHour: number; // e.g. 18.5 uSv/h
+  dailyAccumulatedMilliSv: number;    // e.g. 0.44 mSv/day
+  missionCumulativeMilliSv: number;   // e.g. 19.8 mSv
+  careerLimitMilliSv: number;         // e.g. 600 mSv (NASA lifetime limit)
+  thresholdWarningMilliSvPerDay: number; // 1.0 mSv/day
+  thresholdCriticalMilliSvPerDay: number; // 2.5 mSv/day (SPE - Solar Particle Event)
+  solarActivityStatus: 'Quiet' | 'Moderate Flare Warning' | 'Active SPE Alert';
+  dosimeterReadings: { time: string; rateUSvH: number }[];
+}
+
+export interface FoodPouchItem {
+  id: string;
+  barcode: string;
+  name: string;
+  category: 'Entree' | 'Vegetable' | 'Dessert' | 'Rehydratable Drink' | 'Fresh Ration';
+  calories: number;
+  carbsG: number;
+  proteinG: number;
+  fatG: number;
+  sodiumMg: number;
+  shelfLife: string;
+  servingSize: string;
+}
+
+export interface MealLogEntry {
+  id: string;
+  timestamp: string;
+  astronautId: string;
+  pouchBarcode: string;
+  itemName: string;
+  calories: number;
+  carbsG: number;
+  proteinG: number;
+  fatG: number;
+  portionEatenPct: number; // 25, 50, 75, 100
+  mealType: 'Breakfast' | 'Lunch' | 'Dinner' | 'EVA Snack' | 'Extra Swap';
+  plannedVsActual: 'Planned' | 'Unplanned Swap' | 'Extra';
+  confirmed: boolean;
+}
+
+export interface DailyAstronautWellnessLog {
+  id: string;
+  timestamp: string;
+  astronautId: string;
+  waterDispenserMl: number;
+  waterManualMl: number;
+  appetiteRating: number; // 1-5
+  nauseaRating: number;   // 1-5 (space motion adaptation)
+  moodRating: number;     // 1-5
+  exerciseCompletedMin: number;
+  resistanceDeviceUsed: 'ARED' | 'T2 Treadmill' | 'CEVIS Cycle' | 'None';
+  voiceAcousticNotes?: string;
+}
+
+export interface PrivacyPermissionEntry {
+  id: string;
+  accessorName: string;
+  accessorRole: string;
+  agencyOrUnit: string;
+  category: 'Flight Surgery' | 'Biomedical Engineering' | 'Command Team' | 'Research Study';
+  accessLevel: 'Full Real-time' | 'Aggregated Daily Summary' | 'Emergency Only' | 'Revoked';
+  lastAccessed: string;
+  revocable: boolean;
+}
+
+export interface EmergencyAccessLog {
+  id: string;
+  timestamp: string;
+  accessorIdentity: string;
+  reason: string;
+  patientId: string;
+  dataAccessed: string;
+}
+
+export interface ClinicianReviewSession {
+  id: string;
+  reviewDate: string;
+  clinicianName: string;
+  clinicianRole: string;
+  status: 'Pending' | 'Completed & Signed' | 'Transmitted to Ground';
+  clinicalNotes: string;
+  instructions: string;
+  digitalSignature?: string;
+  signedAt?: string;
+  discussionQuestions: { id: string; question: string; answered: boolean }[];
 }

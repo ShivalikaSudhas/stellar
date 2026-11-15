@@ -249,23 +249,27 @@ export const App: React.FC = () => {
       {/* ========================================================= */}
       <div className="h-12 bg-space-900 border-b border-space-800 px-4 flex items-center justify-between text-xs z-30 select-none flex-shrink-0">
         <div className="flex items-center gap-2 overflow-x-auto py-1">
+          {/* Dr. ORBIT Official Logo & Title */}
+          <div className="flex items-center gap-2 mr-2 flex-shrink-0">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-space-800 to-space-950 border border-accent-blue/40 flex items-center justify-center p-1 shadow-glow-blue flex-shrink-0">
+              <svg viewBox="0 0 100 100" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="32" fill="#0c4a6e" stroke="#38bdf8" strokeWidth="2" />
+                <path d="M35 42C38 38 46 38 50 42C54 46 62 45 65 42C67 49 60 55 54 55C48 55 45 61 38 61C33 61 32 50 35 42Z" fill="#0284c7" opacity="0.6" />
+                <ellipse cx="50" cy="50" rx="44" ry="16" stroke="#38bdf8" strokeWidth="2" strokeDasharray="3 3" transform="rotate(-25 50 50)" />
+                <rect x="46" y="38" width="8" height="24" rx="2" fill="#ef4444" />
+                <rect x="38" y="46" width="24" height="8" rx="2" fill="#ef4444" />
+                <path d="M42 66C42 72 58 72 58 66" stroke="#f8fafc" strokeWidth="2.5" strokeLinecap="round" />
+                <circle cx="50" cy="74" r="3" fill="#f8fafc" />
+              </svg>
+            </div>
+            <span className="font-serif font-bold text-white text-sm tracking-wide hidden sm:inline">Dr. ORBIT</span>
+          </div>
+
           <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 hidden xl:inline">
-            INTERFACE MODE:
+            INTERFACE:
           </span>
 
           <div className="flex items-center bg-space-950 p-1 rounded-xl border border-space-800 gap-1">
-            <button
-              onClick={() => setViewMode('mobile')}
-              className={`px-3 py-1 rounded-lg flex items-center gap-1.5 font-bold transition-all text-xs ${
-                viewMode === 'mobile'
-                  ? 'bg-white text-space-950 shadow-sm'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Smartphone size={13} />
-              <span>Mobile Phone (Image 1 & 3)</span>
-            </button>
-
             <button
               onClick={() => setViewMode('laptop')}
               className={`px-3 py-1 rounded-lg flex items-center gap-1.5 font-bold transition-all text-xs ${
@@ -275,19 +279,7 @@ export const App: React.FC = () => {
               }`}
             >
               <Laptop size={13} />
-              <span>Laptop Dashboard (Image 2)</span>
-            </button>
-
-            <button
-              onClick={() => setViewMode('nasa')}
-              className={`px-3 py-1 rounded-lg flex items-center gap-1.5 font-bold transition-all text-xs ${
-                viewMode === 'nasa'
-                  ? 'bg-white text-space-950 shadow-sm'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Activity size={13} />
-              <span className="hidden sm:inline">Mission Telemetry</span>
+              <span>Laptop Dashboard (Astronaut)</span>
             </button>
 
             <button
@@ -299,7 +291,31 @@ export const App: React.FC = () => {
               }`}
             >
               <Stethoscope size={13} />
-              <span className="hidden md:inline">Doctor Console</span>
+              <span>Doctor Console</span>
+            </button>
+
+            <button
+              onClick={() => setViewMode('mobile')}
+              className={`px-3 py-1 rounded-lg flex items-center gap-1.5 font-bold transition-all text-xs ${
+                viewMode === 'mobile'
+                  ? 'bg-white text-space-950 shadow-sm'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Smartphone size={13} />
+              <span className="hidden sm:inline">Mobile Phone</span>
+            </button>
+
+            <button
+              onClick={() => setViewMode('nasa')}
+              className={`px-3 py-1 rounded-lg flex items-center gap-1.5 font-bold transition-all text-xs ${
+                viewMode === 'nasa'
+                  ? 'bg-white text-space-950 shadow-sm'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Activity size={13} />
+              <span className="hidden md:inline">Mission Telemetry</span>
             </button>
           </div>
         </div>

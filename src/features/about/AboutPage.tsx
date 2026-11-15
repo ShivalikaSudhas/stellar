@@ -20,19 +20,19 @@ export const AboutPage: React.FC = () => {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-2xl font-bold tracking-widest text-white">STELLAR</h1>
-              <span className="text-xs font-mono px-2 py-0.5 rounded bg-cyan-accent/20 text-cyan-accent border border-cyan-accent/40">
+              <h1 className="text-2xl font-bold tracking-widest text-white">Dr. ORBIT</h1>
+              <span className="text-xs font-mono px-2 py-0.5 rounded bg-cyan-accent/20 text-cyan-accent border border-cyan-accent/40 font-bold">
                 NASA Space Apps Challenge 2026
               </span>
             </div>
             <p className="text-xs text-space-300 font-mono">
-              Spaceflight Telemetry, Evaluation, Longitudinal Longevity & Anomaly Recognition
+              Astronaut Health Monitoring, Explainable Spaceflight AI & Ground Doctor Telemetry
             </p>
           </div>
         </div>
 
         <p className="text-sm text-slate-300 leading-relaxed font-sans mt-4 max-w-3xl">
-          An offline-first operational health intelligence platform designed for deep-space missions. STELLAR replaces arbitrary population-wide thresholds with individual personal baselines, multi-indicator temporal correlation, and deterministic explainable alerts to protect astronaut autonomy beyond low Earth orbit.
+          An offline-first operational health intelligence platform designed for deep-space missions and planetary expeditions. Dr. ORBIT replaces static Earth thresholds with individual personal baselines, multi-indicator temporal correlation, and deterministic explainable AI insights to empower astronaut autonomy and direct collaboration with flight surgeons and attending doctors.
         </p>
       </div>
 
