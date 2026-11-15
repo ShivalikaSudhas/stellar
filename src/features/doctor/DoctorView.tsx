@@ -306,21 +306,9 @@ export const DoctorView: React.FC<DoctorViewProps> = ({
       <div className="space-card p-6 bg-gradient-to-r from-space-900 via-space-850 to-space-900 border-l-4 border-l-accent-blue shadow-2xl">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            {/* Dr. ORBIT Official Logo SVG */}
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-space-800 to-space-950 border border-accent-blue/40 flex items-center justify-center p-2.5 shadow-glow-blue flex-shrink-0">
-              <svg viewBox="0 0 100 100" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Earth Globe */}
-                <circle cx="50" cy="50" r="32" fill="#0c4a6e" stroke="#38bdf8" strokeWidth="2" />
-                <path d="M35 42C38 38 46 38 50 42C54 46 62 45 65 42C67 49 60 55 54 55C48 55 45 61 38 61C33 61 32 50 35 42Z" fill="#0284c7" opacity="0.6" />
-                {/* Orbit Ring */}
-                <ellipse cx="50" cy="50" rx="44" ry="16" stroke="#38bdf8" strokeWidth="2" strokeDasharray="3 3" transform="rotate(-25 50 50)" />
-                {/* Medical Cross */}
-                <rect x="46" y="38" width="8" height="24" rx="2" fill="#ef4444" />
-                <rect x="38" y="46" width="24" height="8" rx="2" fill="#ef4444" />
-                {/* Stethoscope Accent */}
-                <path d="M42 66C42 72 58 72 58 66" stroke="#f8fafc" strokeWidth="2.5" strokeLinecap="round" />
-                <circle cx="50" cy="74" r="3" fill="#f8fafc" />
-              </svg>
+            {/* Dr. ORBIT Official Astronaut + Stethoscope Logo */}
+            <div className="w-16 h-16 rounded-full overflow-hidden bg-white border-2 border-accent-blue/50 flex items-center justify-center p-0.5 shadow-glow-blue flex-shrink-0">
+              <img src="/dr-orbit-logo.png" alt="Dr. ORBIT Official Logo" className="w-full h-full object-contain" />
             </div>
 
             <div>

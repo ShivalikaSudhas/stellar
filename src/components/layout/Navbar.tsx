@@ -62,8 +62,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     <aside className="w-64 bg-space-900 border-r border-space-700 flex flex-col flex-shrink-0 select-none">
       {/* Brand Header */}
       <div className="h-16 px-4 flex items-center gap-3 border-b border-space-700 bg-space-950">
-        <div className="w-9 h-9 rounded bg-cyan-accent/10 border border-cyan-accent/40 flex items-center justify-center flex-shrink-0 text-cyan-accent">
-          <ShieldAlert size={20} className="text-cyan-accent animate-pulse" />
+        <div className="w-10 h-10 rounded-full overflow-hidden bg-white border border-cyan-accent/50 flex items-center justify-center flex-shrink-0 p-0.5 shadow-md">
+          <img src="/dr-orbit-logo.png" alt="Dr. ORBIT Logo" className="w-full h-full object-contain" />
         </div>
         <div>
           <div className="flex items-center gap-1.5">

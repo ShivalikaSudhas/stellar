@@ -393,17 +393,8 @@ export const LaptopDashboardView: React.FC<LaptopDashboardViewProps> = ({
         <div className="space-y-6">
           {/* Dr. ORBIT Official Logo & Header */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-cyan-950/70 border border-cyan-400/40 p-1 flex items-center justify-center shadow-lg shadow-cyan-950/50 flex-shrink-0">
-              <svg viewBox="0 0 100 100" className="w-full h-full" fill="none">
-                <circle cx="50" cy="50" r="45" stroke="#38BDF8" strokeWidth="3" opacity="0.4" strokeDasharray="6 4" />
-                <circle cx="50" cy="50" r="36" fill="#0B132B" stroke="#1D4ED8" strokeWidth="2.5" />
-                <path d="M50 22 C64 22 75 33 75 47 C75 57 68 65 59 69 L59 74 C59 76 57 78 55 78 L45 78 C43 78 41 76 41 74 L41 69 C32 65 25 57 25 47 C25 33 36 22 50 22 Z" fill="#1E293B" stroke="#38BDF8" strokeWidth="2" />
-                <rect x="44" y="32" width="12" height="30" rx="3" fill="#EF4444" />
-                <rect x="35" y="41" width="30" height="12" rx="3" fill="#EF4444" />
-                <path d="M30 45 C28 55 35 68 50 68 C65 68 72 55 70 45" stroke="#38BDF8" strokeWidth="3" strokeLinecap="round" />
-                <circle cx="30" cy="45" r="4" fill="#38BDF8" />
-                <circle cx="70" cy="45" r="4" fill="#38BDF8" />
-              </svg>
+            <div className="w-12 h-12 rounded-full overflow-hidden bg-white border-2 border-cyan-400/60 p-0.5 flex items-center justify-center shadow-lg shadow-cyan-950/50 flex-shrink-0">
+              <img src="/dr-orbit-logo.png" alt="Dr. ORBIT Official Logo" className="w-full h-full object-contain" />
             </div>
             <div>
               <span className="font-serif font-bold text-white tracking-wider text-lg block leading-none">

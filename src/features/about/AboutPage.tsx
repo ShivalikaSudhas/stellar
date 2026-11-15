@@ -15,8 +15,8 @@ export const AboutPage: React.FC = () => {
       {/* Hero Header */}
       <div className="aerospace-card p-8 bg-gradient-to-br from-space-900 via-space-850 to-space-950 border border-space-700">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 rounded-lg bg-cyan-accent/10 border border-cyan-accent/40 flex items-center justify-center text-cyan-accent">
-            <ShieldAlert size={28} className="text-cyan-accent" />
+          <div className="w-14 h-14 rounded-full overflow-hidden bg-white border border-cyan-accent/50 flex items-center justify-center p-0.5 shadow-md flex-shrink-0">
+            <img src="/dr-orbit-logo.png" alt="Dr. ORBIT Logo" className="w-full h-full object-contain" />
           </div>
           <div>
             <div className="flex items-center gap-2">
