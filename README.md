@@ -32,13 +32,12 @@ To make evaluation seamless for hackathon judges and mission operators, **Dr. OR
 
 Judges and evaluators can switch between all 4 specialized operational viewpoints in one click without authenticating through tedious multi-account logins:
 
-```mermaid
 flowchart TD
     App[Dr. ORBIT Global Interface Switcher] --> V1[💻 Laptop Dashboard\n(Astronaut Interface)]
     App --> V2[🩺 Doctor Console\n(Attending Doctor)]
     App --> V3[📱 Mobile Terminal\n(Crew Pocket Device)]
     App --> V4[🛰️ Mission Telemetry\n(Ground Control & MCC)]
-```
+
 
 ### The 4 Integrated Interfaces:
 
