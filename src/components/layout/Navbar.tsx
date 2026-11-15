@@ -7,8 +7,7 @@ import {
   FileText,
   Settings,
   Info,
-  ChevronRight,
-  ShieldAlert
+  ChevronRight
 } from 'lucide-react';
 
 export type NavigationTab =
