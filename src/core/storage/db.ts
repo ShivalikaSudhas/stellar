@@ -85,17 +85,25 @@ export const db = new StellarDatabase();
 export const DEFAULT_EMERGENCY_CONTACTS: EmergencyContact[] = [
   {
     id: 'em-1',
-    name: 'Rohan Sharma',
-    relationship: 'Son (Caregiver)',
-    phone: '+1 (555) 234-8901',
+    name: 'NASA Mission Control (MCC Houston)',
+    relationship: 'Flight Operations Director',
+    phone: 'Freq 2287.5 MHz (S-Band)',
     isPrimary: true,
     notifyOnCritical: true
   },
   {
     id: 'em-2',
-    name: 'Dr. Rajesh Mehta',
-    relationship: 'Primary Cardiologist',
-    phone: '+1 (555) 789-0123',
+    name: 'Dr. Rajesh Mehta, MD',
+    relationship: 'Lead Attending Doctor',
+    phone: 'Channel BME-1 (Direct Telemetry)',
+    isPrimary: false,
+    notifyOnCritical: true
+  },
+  {
+    id: 'em-3',
+    name: 'Station Commander (Habitat Intercom)',
+    relationship: 'Onboard Mission Lead',
+    phone: 'Internal Loop Alpha',
     isPrimary: false,
     notifyOnCritical: true
   }
@@ -105,42 +113,32 @@ export const DEFAULT_USERS: UserProfile[] = [
   {
     id: 'user-asha',
     name: 'Asha Sharma',
-    email: 'asha.sharma@healthpulse.org',
+    email: 'asha.sharma@nasa.gov',
     role: 'patient',
-    age: 58,
+    age: 42,
     gender: 'Female',
+    callsign: 'VALKYRIE',
+    missionId: 'ARTEMIS-VII',
+    bloodType: 'B+',
     selectedLanguage: 'en',
     elderlyMode: false,
     lowCostMode: false,
     emergencyContacts: DEFAULT_EMERGENCY_CONTACTS,
-    doctorName: 'Dr. Rajesh Mehta',
-    hospitalAffiliation: 'Apollo / Metro Cardiology Center'
+    doctorName: 'Dr. Rajesh Mehta, MD',
+    hospitalAffiliation: 'NASA Johnson Space Center • Flight Medicine Division'
   },
   {
     id: 'user-dr-mehta',
     name: 'Dr. Rajesh Mehta, MD',
-    email: 'dr.mehta@cardio.med',
+    email: 'dr.mehta@nasa.gov',
     role: 'doctor',
     age: 49,
     gender: 'Male',
     selectedLanguage: 'en',
     elderlyMode: false,
     lowCostMode: false,
-    emergencyContacts: [],
-    hospitalAffiliation: 'Metro Heart Institute'
-  },
-  {
-    id: 'user-rohan',
-    name: 'Rohan Sharma',
-    email: 'rohan.sharma@family.net',
-    role: 'caregiver',
-    age: 32,
-    gender: 'Male',
-    selectedLanguage: 'en',
-    elderlyMode: false,
-    lowCostMode: false,
-    emergencyContacts: [],
-    doctorName: 'Dr. Rajesh Mehta'
+    emergencyContacts: DEFAULT_EMERGENCY_CONTACTS,
+    hospitalAffiliation: 'NASA Mission Health Operations'
   }
 ];
 
@@ -207,59 +205,59 @@ export const DEFAULT_CARE_PLAN: CarePlan = {
 export const DEFAULT_FAMILY_MEMBERS: FamilyCircleMember[] = [
   {
     id: 'fam-1',
-    name: 'Rohan Sharma',
-    relation: 'Son (Primary Caregiver)',
+    name: 'NASA Mission Control (MCC Houston)',
+    relation: 'Flight Operations Directorate',
     privacyTier: 'full',
-    phone: '+1 (555) 234-8901',
-    lastActive: '10 mins ago'
+    phone: 'S-Band Loop 1',
+    lastActive: 'Active now'
   },
   {
     id: 'fam-2',
-    name: 'Priya Sharma',
-    relation: 'Daughter',
-    privacyTier: 'summary',
-    phone: '+1 (555) 345-6789',
-    lastActive: '2 hours ago'
+    name: 'Commander Marcus Vance',
+    relation: 'Mission Commander (Onboard)',
+    privacyTier: 'full',
+    phone: 'Intercom Loop Alpha',
+    lastActive: '5 mins ago'
   },
   {
     id: 'fam-3',
-    name: 'Anil Sharma',
-    relation: 'Brother',
+    name: 'Dr. Rajesh Mehta, MD',
+    relation: 'Lead Attending Doctor',
     privacyTier: 'emergency',
-    phone: '+1 (555) 456-7890',
-    lastActive: 'Yesterday'
+    phone: 'Channel BME-1',
+    lastActive: 'Active now'
   }
 ];
 
 export const DEFAULT_AUDIT_LOGS: DataAccessAuditEntry[] = [
   {
     id: 'audit-1',
-    accessorName: 'Dr. Rajesh Mehta',
-    accessorRole: 'Treating Cardiologist',
-    organization: 'Metro Heart Institute',
-    purpose: 'Routine monthly cardiology telehealth review',
+    accessorName: 'Dr. Rajesh Mehta, MD',
+    accessorRole: 'Lead Attending Doctor',
+    organization: 'NASA Mission Health Directorate',
+    purpose: 'Routine in-flight cardiovascular telemetry review',
     timestamp: '2026-11-14T08:15:00.000Z',
-    scope: 'Full Vitals & Medication History',
+    scope: 'Full Vitals & Protocol Adherence History',
     status: 'active'
   },
   {
     id: 'audit-2',
-    accessorName: 'Rohan Sharma',
-    accessorRole: 'Designated Caregiver',
-    organization: 'Family Circle',
-    purpose: 'Daily medication adherence and vitals check',
+    accessorName: 'NASA Mission Telemetry Gateway',
+    accessorRole: 'Flight Operations Health Console',
+    organization: 'NASA JSC Flight Ops',
+    purpose: 'Autonomous telemetry packet verification & ECLSS sync',
     timestamp: '2026-11-14T07:45:00.000Z',
-    scope: 'Daily Summary & BP alerts',
+    scope: 'Real-time Vitals & Anomaly Stream',
     status: 'active'
   },
   {
     id: 'audit-3',
-    accessorName: 'Apollo Diagnostic Lab Sync',
-    accessorRole: 'Diagnostic EMR Gateway',
-    organization: 'Apollo Health FHIR',
-    purpose: 'Lab test results synchronization',
+    accessorName: 'Mission Biological Telemetry Hub',
+    accessorRole: 'Biomedical Telemetry Relay',
+    organization: 'Spaceflight Health Monitoring System',
+    purpose: 'Offline baseline verification & trend calibration',
     timestamp: '2026-11-10T12:00:00.000Z',
-    scope: 'Blood panel & lipid profile',
+    scope: 'Longitudinal baseline calculations',
     status: 'active'
   }
 ];

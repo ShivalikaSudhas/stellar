@@ -1171,9 +1171,10 @@ export const MobilePhoneView: React.FC<MobilePhoneViewProps> = ({
             </div>
 
             <div className="space-card p-4 text-xs font-mono text-left space-y-1.5 text-slate-300">
-              <div className="text-slate-400 uppercase text-[10px]">Primary Responders:</div>
-              <div>• Rohan Sharma (+1 555-234-8901)</div>
-              <div>• Flight Surgeon Console (Channel BME-1)</div>
+              <div className="text-slate-400 uppercase text-[10px]">Telemetry Distress Recipients:</div>
+              <div>• NASA Mission Control (MCC Houston - S-Band)</div>
+              <div>• Doctor Console (Channel BME-1)</div>
+              <div>• Station Commander (Intercom Loop Alpha)</div>
             </div>
 
             <button
@@ -1220,7 +1221,7 @@ export const MobilePhoneView: React.FC<MobilePhoneViewProps> = ({
                 </div>
 
                 <div className="flex items-center justify-between py-1 border-b border-space-800">
-                  <span className="text-xs font-medium text-slate-200">Family Member (Rohan)</span>
+                  <span className="text-xs font-medium text-slate-200">NASA Flight Operations (MCC)</span>
                   <input
                     type="checkbox"
                     checked={privacyToggles.familyMember}
