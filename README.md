@@ -38,23 +38,20 @@ STELLAR features a persistent, top-level **Interface Mode Switcher** allowing in
 
 ```mermaid
 flowchart TD
-    App[Global Interface Mode Switcher] --> V1[📱 Mobile Phone Layout]
-    App --> V2[💻 Laptop Dashboard Layout]
-    App --> V3[📊 Mission Telemetry Console]
-    App --> V4[🩺 Doctor View]
-    App --> V5[🤝 Caregiver Circle]
-    App --> V6[👵 Elderly Mode]
+    App[Global Interface Mode Switcher] --> V1[📱 Astronaut Mobile Terminal]
+    App --> V2[💻 Astronaut Laptop Workstation]
+    App --> V3[📊 NASA Mission Telemetry Console]
+    App --> V4[🩺 Flight Surgeon / Doctor Console]
 
-    subgraph Mobile Layout Modes
+    subgraph Astronaut Terminal Views
         V1 --> M1[Pulse Daily View\n(Plaid Navy Card, 72 bpm ECG, Dark Font Vitals)]
         V1 --> M2[Orbital 12-Flow System\n(Rotating 3D Earth, Telemetry Gauge, Sleep, Trends)]
+        V2 --> L1[Habitat Workstation Grid\n(Linked Clinicians, Calendar, 3 Circular Countermeasure Rings)]
     end
 
-    subgraph Laptop Multi-Panel Grid
-        V2 --> L1[Left Sidebar: Profile, Nav, Emergency SOS]
-        V2 --> L2[Header: HELLO ASHA, Search, Biomarkers]
-        V2 --> L3[Middle: Linked Clinicians, Events, Schedule Calendar]
-        V2 --> L4[Right Column: Circular Progress Rings 90%, 60%, 75%]
+    subgraph Mission Control & Clinical Consoles
+        V3 --> N1[Mission Overview & Personal Baseline Engine\n(Z-score deviations, Trend correlations, Anomaly simulator)]
+        V4 --> D1[Flight Surgeon Triage\n(High/Moderate/Stable urgency, Clinical notes, SOS dispatch)]
     end
 ```
 
@@ -105,11 +102,9 @@ Located in [`src/components/layout/LaptopDashboardView.tsx`](file:///d:/STELLAR/
 
 ---
 
-### C. Clinical & Specialized Perspectives
-- **Doctor Console View** ([`DoctorView.tsx`](file:///d:/STELLAR/src/features/doctor/DoctorView.tsx)): Clinician triage console with patient list sorted by risk (`high`, `moderate`, `stable`), vitals timeline, and feedback note composer.
-- **Caregiver Circle View** ([`CaregiverView.tsx`](file:///d:/STELLAR/src/features/caregiver/CaregiverView.tsx)): Family member dashboard supporting 3 privacy tiers (*Summary*, *Full*, *Emergency*) with 1-click voice call.
-- **Elderly Accessible Mode** ([`ElderlyModeView.tsx`](file:///d:/STELLAR/src/components/layout/ElderlyModeView.tsx)): High-contrast 24pt+ typography, 1-touch actions, and Web Speech API voice synthesis.
-- **Mission Telemetry Console** (Original NASA Space Apps Operational Suite): Full engineering suite featuring baseline engines, multi-indicator trend analytics, data simulator, CSV/JSON validator, and PDF/CSV mission reports.
+### C. Flight Surgeon & Mission Operations Consoles
+- **Flight Surgeon / Doctor Console View** ([`DoctorView.tsx`](file:///d:/STELLAR/src/features/doctor/DoctorView.tsx)): Direct clinical triage console for mission flight surgeons. Features crew roster sorted by clinical urgency (`high`, `moderate`, `stable`), longitudinal vitals timeline, and structured clinical note composer with action recommendations.
+- **Mission Telemetry Console** (Original NASA Space Apps Operational Suite): Full engineering suite featuring personal baseline engines, multi-indicator trend analytics, mission data simulator, CSV/JSON schema validator, and downloadable PDF/CSV flight health reports.
 
 ---
 
@@ -127,9 +122,7 @@ Located in [`src/components/layout/LaptopDashboardView.tsx`](file:///d:/STELLAR/
 | **Intelligence** | **Trend & Anomaly Detection** | Z-score statistical trend tracking with multi-indicator correlation ([`trendDetection.ts`](file:///d:/STELLAR/src/core/analysis/trendDetection.ts)). |
 | **Intelligence** | **Explainable Alert Engine** | Deterministic rule engine producing transparent observations, personal baseline deviations, persistence tracking, and operational action protocols ([`alertEngine.ts`](file:///d:/STELLAR/src/core/alerts/alertEngine.ts)). |
 | **Care & Support** | **Care Plan & Adherence** | Doctor-prescribed diet plans, exercise countermeasure schedules, daily medication adherence, and side-effect reporting ([`CarePlanView.tsx`](file:///d:/STELLAR/src/features/careplan/CarePlanView.tsx)). |
-| **Care & Support** | **Doctor Console View** | Risk-sorted patient triage list, longitudinal vitals timeline, and direct patient feedback note composer ([`DoctorView.tsx`](file:///d:/STELLAR/src/features/doctor/DoctorView.tsx)). |
-| **Care & Support** | **Caregiver Circle** | Granular family privacy tiers (*Summary*, *Full*, *Emergency*) with reassuring status indicators and priority calling ([`CaregiverView.tsx`](file:///d:/STELLAR/src/features/caregiver/CaregiverView.tsx)). |
-| **Care & Support** | **Elderly Accessible Mode** | Extra-large 24pt+ typography, high-contrast dark fonts on ivory/white panels, simple 1-touch actions, and voice synthesis ([`ElderlyModeView.tsx`](file:///d:/STELLAR/src/components/layout/ElderlyModeView.tsx)). |
+| **Care & Support** | **Flight Surgeon Console** | Urgency-sorted crew triage list (`high`, `moderate`, `stable`), longitudinal vitals timeline, and direct clinical feedback note composer ([`DoctorView.tsx`](file:///d:/STELLAR/src/features/doctor/DoctorView.tsx)). |
 | **Care & Support** | **1-Page Doctor Brief** | Comprehensive pre-visit summary optimized for clinical review and printing (`window.print()`) ([`DoctorSummaryModal.tsx`](file:///d:/STELLAR/src/components/features/DoctorSummaryModal.tsx)). |
 | **Safety & Security** | **Emergency SOS Trigger** | 5-second countdown modal with automatic beacon dispatch simulation to mission control and primary family contacts ([`EmergencySosModal.tsx`](file:///d:/STELLAR/src/components/features/EmergencySosModal.tsx)). |
 | **Safety & Security** | **Data Access & Privacy** | Crew data ownership dashboard allowing toggleable permissions for medical teams, family members, and research use. |
@@ -139,7 +132,7 @@ Located in [`src/components/layout/LaptopDashboardView.tsx`](file:///d:/STELLAR/
 | **Data & Integrations** | **Mission Data Simulator** | Interactive playback of 3 demonstration scenarios (Normal Day, Sleep Disruption, Unusual Physiological Trend) ([`SimulatorPage.tsx`](file:///d:/STELLAR/src/features/simulator/SimulatorPage.tsx)). |
 | **Platform Essentials**| **100% Offline-First** | IndexedDB storage (Dexie.js) paired with Vite PWA Service Worker caching. Zero cloud dependencies. |
 | **Platform Essentials**| **Multilingual Support** | Plain-language health explanations translated across English, Hindi, Spanish, Tamil, and Telugu ([`translations.ts`](file:///d:/STELLAR/src/core/i18n/translations.ts)). |
-| **Platform Essentials**| **Role-Based Access** | Seamless role switching between Patient/Astronaut, Doctor/Flight Surgeon, and Family Caregiver. |
+| **Platform Essentials**| **Role-Based Access** | Seamless operational switching between Crew Terminal (Mobile/Laptop), Mission Telemetry Console, and Flight Surgeon Console. |
 
 ---
 
@@ -294,20 +287,16 @@ These differences justify the **Personal Baseline Engine** and **Explainable Ale
 
 ## 11. UI Simplification & Self‑Testing
 
-- **Removed Unused Tabs/Pages**: `Analytics`, `Wellness`, `Import`, and duplicate `Health Insights` tabs that duplicated the laptop dashboard have been stripped from the navigation to reduce clutter.
-- **Mission Planner**: Fixed layout on laptop view; now renders correctly in desktop browsers and tablet breakpoints.
+- **Removed Redundant Views**: Stripped out terrestrial consumer modes (`Caregiver Circle`, `Elderly Mode`) to keep STELLAR 100% focused on astronaut physiology, flight surgery, and NASA mission telemetry.
+- **Mission Planner**: Fixed responsive layout on laptop view; renders correctly across desktop browsers and tablet breakpoints.
 - **Testing Checklist** (run `npm test` and then manually open each view mode):
-  1. Mobile Phone (`viewMode='mobile'`) – verify Pulse Daily View and Orbital 12‑Flow.
-  2. Laptop Dashboard (`viewMode='laptop'`) – verify sidebar, header, middle column, and three progress rings.
-  3. Doctor Console (`viewMode='doctor'`) – patient list, urgency colors, note composer, SOS button.
-  4. Caregiver Circle (`viewMode='caregiver'`) – privacy tier switching.
-  5. Elderly Mode (`viewMode='elderly'`) – large fonts, voice synthesis, SOS.
-  6. Mission Telemetry (`viewMode='nasa'`) – Mission Overview, Data Simulator, Reports.
+  1. Astronaut Mobile (`viewMode='mobile'`) – verify Pulse Daily View and Orbital 12‑Flow.
+  2. Astronaut Laptop (`viewMode='laptop'`) – verify sidebar, header, middle column, and three countermeasure progress rings.
+  3. Flight Surgeon Console (`viewMode='doctor'`) – patient list, urgency colors (High/Moderate/Stable), clinical note composer, SOS dispatch button.
+  4. NASA Mission Telemetry (`viewMode='nasa'`) – Mission Overview, Personal Baselines Engine, Data Simulator, CSV/PDF Reports.
 
-All components now pass the **19 Vitest unit tests** and the **production build** (`npm run build`) succeeds without errors.
+All components pass the **19 Vitest unit tests** and the **production build** (`npm run build`) succeeds without errors.
 
 ## 12. License
-
-Distributed under the **MIT License**. Developed for the **NASA Space Apps Challenge 2026**.
 
 Distributed under the **MIT License**. Developed for the **NASA Space Apps Challenge 2026**.

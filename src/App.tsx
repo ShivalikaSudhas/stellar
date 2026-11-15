@@ -19,8 +19,6 @@ import { AboutPage } from '@/features/about/AboutPage';
 import { MobilePhoneView } from '@/components/layout/MobilePhoneView';
 import { LaptopDashboardView } from '@/components/layout/LaptopDashboardView';
 import { DoctorView } from '@/features/doctor/DoctorView';
-import { CaregiverView } from '@/features/caregiver/CaregiverView';
-import { ElderlyModeView } from '@/components/layout/ElderlyModeView';
 
 // Interactive Drilldown Modals
 import { VitalHistoryModal } from '@/components/common/VitalHistoryModal';
@@ -41,14 +39,12 @@ import {
   Laptop,
   Activity,
   Stethoscope,
-  Users,
-  Eye,
   Plus,
   FileText,
   AlertTriangle
 } from 'lucide-react';
 
-export type MasterViewMode = 'mobile' | 'laptop' | 'nasa' | 'doctor' | 'caregiver' | 'elderly';
+export type MasterViewMode = 'mobile' | 'laptop' | 'nasa' | 'doctor';
 
 export const App: React.FC = () => {
   const [viewMode, setViewMode] = useState<MasterViewMode>('mobile');
@@ -303,31 +299,7 @@ export const App: React.FC = () => {
               }`}
             >
               <Stethoscope size={13} />
-              <span className="hidden md:inline">Doctor Console</span>
-            </button>
-
-            <button
-              onClick={() => setViewMode('caregiver')}
-              className={`px-2.5 py-1 rounded-lg flex items-center gap-1.5 font-bold transition-all text-xs ${
-                viewMode === 'caregiver'
-                  ? 'bg-white text-space-950 shadow-sm'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Users size={13} />
-              <span className="hidden md:inline">Caregiver Circle</span>
-            </button>
-
-            <button
-              onClick={() => setViewMode('elderly')}
-              className={`px-2.5 py-1 rounded-lg flex items-center gap-1.5 font-bold transition-all text-xs ${
-                viewMode === 'elderly'
-                  ? 'bg-white text-space-950 shadow-sm'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Eye size={13} />
-              <span className="hidden lg:inline">Elderly Mode</span>
+              <span className="hidden md:inline">Flight Surgeon Console</span>
             </button>
           </div>
         </div>
@@ -415,7 +387,7 @@ export const App: React.FC = () => {
           </div>
         )}
 
-        {/* VIEW MODE 3: DOCTOR CONSOLE */}
+        {/* VIEW MODE 3: DOCTOR / FLIGHT SURGEON CONSOLE */}
         {viewMode === 'doctor' && (
           <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-space-950">
             <DoctorView
@@ -425,32 +397,7 @@ export const App: React.FC = () => {
           </div>
         )}
 
-        {/* VIEW MODE 4: CAREGIVER CIRCLE */}
-        {viewMode === 'caregiver' && (
-          <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-space-950">
-            <CaregiverView
-              patientProfile={primaryUserProfile}
-              medications={medications}
-              latestReadings={readings}
-              onCallPatient={() => alert(`Dialing emergency voice bridge to ${primaryUserProfile.name}...`)}
-            />
-          </div>
-        )}
-
-        {/* VIEW MODE 5: ELDERLY ACCESSIBLE MODE */}
-        {viewMode === 'elderly' && (
-          <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-space-950">
-            <ElderlyModeView
-              patientName={primaryUserProfile.name}
-              heartRate={currentHeartRate}
-              bloodPressure="121 / 79"
-              onOpenSosModal={() => setShowSosModal(true)}
-              onExitElderlyMode={() => setViewMode('mobile')}
-            />
-          </div>
-        )}
-
-        {/* VIEW MODE 6: NASA MISSION CONTROL (Original Operational Suite) */}
+        {/* VIEW MODE 4: NASA MISSION CONTROL (Original Operational Suite) */}
         {viewMode === 'nasa' && (
           <div className="flex-1 flex overflow-hidden">
             {/* Desktop Sidebar */}
